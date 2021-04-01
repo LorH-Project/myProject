@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.ManagerMapper">
+    <select id="login" resultType="org.demo.bedprojectbefore.pojo.Sys_manager">
+        SELECT * FROM `sys_manager` WHERE `userAccount`=#{username} AND `passWord`=#{password}
+    </select>
+
+</mapper>
