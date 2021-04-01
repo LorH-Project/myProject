@@ -10,4 +10,9 @@ public class UserController {
     public String hello(){
         return "aabb";
     }
+
+    @GetMapping(value = "/hhh")
+    public String hhh(){
+        return "hhh";
+    }
 }
