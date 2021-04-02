@@ -31,6 +31,6 @@ public class UserController {
         if(userList!=null){
             return DtoUtil.returnSuccess(userList);
         }
-        return DtoUtil.returnSuccess("未查到数据","500");
+        return DtoUtil.returnSuccess("未查到数据","404");
     }
 }
