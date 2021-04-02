@@ -2,7 +2,7 @@ package org.demo.bedprojectbefore.pojo;
 
 import java.util.Date;
 
-public class sms_message {
+public class Sms_message {
     private int messageId;
     private String content;
     private String usersIds;
@@ -49,10 +49,10 @@ public class sms_message {
         this.ctime = ctime;
     }
 
-    public sms_message() {
+    public Sms_message() {
     }
 
-    public sms_message(int messageId, String content, String usersIds, String phones, Date ctime) {
+    public Sms_message(int messageId, String content, String usersIds, String phones, Date ctime) {
         this.messageId = messageId;
         this.content = content;
         this.usersIds = usersIds;

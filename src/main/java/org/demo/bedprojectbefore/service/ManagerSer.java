@@ -1,12 +1,9 @@
-package org.demo.bedprojectbefore.mapper;
+package org.demo.bedprojectbefore.service;
 
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.demo.bedprojectbefore.pojo.Sys_manager;
 
+public interface ManagerSer {
 
-@Mapper
-public interface ManagerMapper {
-    //登录
     Sys_manager login(@Param("username") String username, @Param("password") String password);
 }
