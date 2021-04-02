@@ -17,7 +17,7 @@ public class LoginController {
     @Resource
     private ManagerSer managerSer;
 
-    @GetMapping(value = "toLogin")
+    @GetMapping(value = "/toLogin")
     public String toLogin(){
         return "redirect:/login";
     }
@@ -26,9 +26,9 @@ public class LoginController {
     public String login(String username,String password){
         Sys_manager manager=managerSer.login(username,password);
         if(manager!=null){
-
+            System.out.println("登陆成功");
         }
-        return "登录成功";
+        return "";
     }
 
 }

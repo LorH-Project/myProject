@@ -12,7 +12,7 @@ public interface UserMapper {
     //带条件查询用户列表（无分页）
     public List<User> getUserList(@Param("nickName") String nickName,
                                   @Param("userPhone") String userPhone,
-                                  @Param("isDeposit") int isDeposit,
-                                  @Param("isFlag") int isFlag);
+                                  @Param("isDeposit") String isDeposit,
+                                  @Param("isFlag") String isFlag);
 
 }

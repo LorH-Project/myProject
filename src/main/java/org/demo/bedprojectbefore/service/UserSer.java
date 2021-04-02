@@ -1,14 +1,19 @@
 package org.demo.bedprojectbefore.service;
 
-import org.apache.ibatis.annotations.Param;
+import org.demo.bedprojectbefore.mapper.UserMapper;
 import org.demo.bedprojectbefore.pojo.User;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-public interface UserSer {
+@Service
+public class UserSer {
 
-    public List<User> getUserList(@Param("nickName") String nickName,
-                                  @Param("userPhone") String userPhone,
-                                  @Param("isDeposit") int isDeposit,
-                                  @Param("isFlag") int isFlag);
+    @Resource
+    private UserMapper userMapper;
+    
+    public List<User> getUserList(String nickName, String userPhone, String isDeposit, String isFlag) {
+        return userMapper.getUserList(nickName,userPhone,isDeposit,isFlag);
+    }
 }

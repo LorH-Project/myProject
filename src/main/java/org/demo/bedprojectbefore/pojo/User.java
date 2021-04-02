@@ -3,22 +3,22 @@ package org.demo.bedprojectbefore.pojo;
 import java.util.Date;
 
 public class User {
-    private int userId;
+    private Integer userId;
     private String userNo;
     private String nickName;
     private String avatarUrl;
     private String userPhone;
     private String openId;
-    private int isDeposit;
-    private int isFlag;
+    private Integer isDeposit;
+    private Integer isFlag;
     private Date cTime;
-    private int agentId;
+    private Integer agentId;
 
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -62,19 +62,19 @@ public class User {
         this.openId = openId;
     }
 
-    public int getIsDeposit() {
+    public Integer getIsDeposit() {
         return isDeposit;
     }
 
-    public void setIsDeposit(int isDeposit) {
+    public void setIsDeposit(Integer isDeposit) {
         this.isDeposit = isDeposit;
     }
 
-    public int getIsFlag() {
+    public Integer getIsFlag() {
         return isFlag;
     }
 
-    public void setIsFlag(int isFlag) {
+    public void setIsFlag(Integer isFlag) {
         this.isFlag = isFlag;
     }
 
@@ -86,18 +86,18 @@ public class User {
         this.cTime = cTime;
     }
 
-    public int getAgentId() {
+    public Integer getAgentId() {
         return agentId;
     }
 
-    public void setAgentId(int agentId) {
+    public void setAgentId(Integer agentId) {
         this.agentId = agentId;
     }
 
     public User() {
     }
 
-    public User(int userId, String userNo, String nickName, String avatarUrl, String userPhone, String openId, int isDeposit, int isFlag, Date cTime, int agentId) {
+    public User(Integer userId, String userNo, String nickName, String avatarUrl, String userPhone, String openId, Integer isDeposit, Integer isFlag, Date cTime, Integer agentId) {
         this.userId = userId;
         this.userNo = userNo;
         this.nickName = nickName;

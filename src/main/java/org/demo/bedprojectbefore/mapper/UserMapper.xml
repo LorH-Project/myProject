@@ -3,12 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.demo.bedprojectbefore.mapper.UserMapper">
-    <select id="getUserList" parameterType="org.demo.bedprojectbefore.pojo.User">
-        SELECT * FROM `users`
-        WHERE `nickName` LIKE #{nickName}
-        AND `userPhone` =#{userPhone}
-        AND `isDeposit`=#{isDeposit}
-        AND `isFlag`=#{isFlag}
+    <select id="getUserList" resultType="org.demo.bedprojectbefore.pojo.User">
+        SELECT * FROM `users` where 1=1
+        <if test="nickName!=null and nickName!=''">
+            AND `nickName` LIKE connect ('%',#{nickName},'%')
+        </if>
+        <if test="userPhone!=null and userPhone!=''">
+            AND `userPhone` =#{userPhone}
+        </if>
+        <if test="isDeposit!=null and isDeposit!=''">
+            AND `isDeposit`=#{isDeposit}
+        </if>
+        <if test="isFlag!=null and isFlag!=''">
+            AND `isFlag`=#{isFlag}
+        </if>
     </select>
 
 </mapper>
