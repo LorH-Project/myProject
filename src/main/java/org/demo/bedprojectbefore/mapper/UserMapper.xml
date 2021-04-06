@@ -48,6 +48,5 @@
         <if test="isFlag!=null and isFlag!=''">
             AND `isFlag`=#{isFlag}
         </if>
-        limit #{pageNo},#{pageSize}
     </select>
 </mapper>

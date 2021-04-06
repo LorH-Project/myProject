@@ -3,5 +3,43 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.demo.bedprojectbefore.mapper.HospitalMapper">
-
+    <select id="hospList" resultType="org.demo.bedprojectbefore.pojo.Hospital">
+        SELECT `hospital`.*,`agent`.`companyName`,`agent`.`linkName`,`agent`.`linkPhone`,
+            (SELECT COUNT(*) FROM `device` WHERE `hospitalId`=`hospital`.`hospitalId`) deviceCount
+        FROM `hospital`,`agent` WHERE `agent`.`agentId`=`hospital`.`agentId`
+        <if test="hospitalName!=null and hospitalName!=''">
+            AND `hospitalName` =#{hospitalName}
+        </if>
+        <if test="address!=null and address!=''">
+            AND `address`=#{address}
+        </if>
+        <if test="linkName!=null and linkName!=''">
+            AND `linkName`=#{linkName}
+        </if>
+        <if test="linkPhone!=null and linkPhone!=''">
+            AND `linkPhone`=#{linkPhone}
+        </if>
+        <if test="companyName!=null and companyName!=''">
+            AND `companyName`=#{companyName}
+        </if>
+        LIMIT #{pageNo},#{pageSize}
+    </select>
+    <select id="getHospCount" resultType="org.demo.bedprojectbefore.pojo.Hospital">
+        SELECT count(*) FROM `hospital`,`agent` WHERE `agent`.`agentId`=`hospital`.`agentId`
+        <if test="hospitalName!=null and hospitalName!=''">
+            AND `hospitalName` =#{hospitalName}
+        </if>
+        <if test="address!=null and address!=''">
+            AND `address`=#{address}
+        </if>
+        <if test="linkName!=null and linkName!=''">
+            AND `linkName`=#{linkName}
+        </if>
+        <if test="linkPhone!=null and linkPhone!=''">
+            AND `linkPhone`=#{linkPhone}
+        </if>
+        <if test="companyName!=null and companyName!=''">
+            AND `companyName`=#{companyName}
+        </if>
+    </select>
 </mapper>

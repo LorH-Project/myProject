@@ -20,12 +20,11 @@ public class UserSer {
     public List<User> pageUserList(String nickName, String userPhone, String isDeposit, String isFlag,Integer pageNo,Integer pageSize){
         return userMapper.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
     }
+
     public int getPageUserCount(@Param("nickName") String nickName,
-                               @Param("userPhone") String userPhone,
-                               @Param("isDeposit") String isDeposit,
-                               @Param("isFlag") String isFlag,
-                               @Param("pageNo")Integer pageNo,
-                               @Param("pageSize")Integer pageSize) {
-        return userMapper.getPageUserCount(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
+                                @Param("userPhone") String userPhone,
+                                @Param("isDeposit") String isDeposit,
+                                @Param("isFlag") String isFlag) {
+        return userMapper.getPageUserCount(nickName, userPhone, isDeposit, isFlag);
     }
 }
