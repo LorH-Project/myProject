@@ -12,6 +12,7 @@ import org.demo.bedprojectbefore.service.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @Api("用户管理")
@@ -31,7 +32,10 @@ public class UserController {
 
     @ApiOperation(httpMethod = "POST",value = "getUserList",notes = "查询用户列表")
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
-    public Dto getUserList(String nickName, String userPhone, String isDeposit, String isFlag){
+    public Dto getUserList(@RequestParam(defaultValue = "",required = false) String nickName,
+                           @RequestParam(defaultValue = "",required = false) String userPhone,
+                           @RequestParam(defaultValue = "",required = false) String isDeposit,
+                           @RequestParam(defaultValue = "",required = false) String isFlag){
         List<User> userList=userSer.getUserList(nickName, userPhone, isDeposit, isFlag);
         if(userList!=null){
             return DtoUtil.returnSuccess(userList);
@@ -41,7 +45,12 @@ public class UserController {
 
     @ApiOperation(httpMethod = "POST",value = "pageUserList",notes = "分页查询用户列表")
     @RequestMapping(value = "/pageUserList", method = RequestMethod.POST)
-    public Dto pageUserList(String nickName, String userPhone, String isDeposit, String isFlag, @RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "3")Integer pageSize){
+    public Dto pageUserList(@RequestParam(defaultValue = "",required = false) String nickName,
+                            @RequestParam(defaultValue = "",required = false) String userPhone,
+                            @RequestParam(defaultValue = "",required = false) String isDeposit,
+                            @RequestParam(defaultValue = "",required = false) String isFlag,
+                            @RequestParam(defaultValue = "1")Integer pageNo,
+                            @RequestParam(defaultValue = "3")Integer pageSize){
         List<User> userList=userSer.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
         if(userList!=null){
             Page<User> page=new Page<>();
