@@ -6,6 +6,7 @@ import org.demo.bedprojectbefore.config.DtoUtil;
 import org.demo.bedprojectbefore.pojo.User;
 import org.demo.bedprojectbefore.service.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.List;
 @Api("用户管理")
 @RestController
 @RequestMapping(value = "user/*")
+@CrossOrigin
 public class UserController {
 
     @Autowired
