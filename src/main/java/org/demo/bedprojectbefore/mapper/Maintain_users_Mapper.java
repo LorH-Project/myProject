@@ -1,10 +1,12 @@
 package org.demo.bedprojectbefore.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.demo.bedprojectbefore.pojo.Maintain_users;
 
 import java.util.List;
 
+@Mapper
 public interface Maintain_users_Mapper {
 
     /**

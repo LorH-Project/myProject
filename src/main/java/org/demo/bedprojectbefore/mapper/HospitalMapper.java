@@ -42,4 +42,11 @@ public interface HospitalMapper {
                             @Param("linkName") String linkName,
                             @Param("linkPhone") String linkPhone,
                             @Param("companyName") String companyName);
+
+    /**
+     * 删除医院
+     * @param id
+     * @return
+     */
+    public int delHosp(@Param("id") int id);
 }

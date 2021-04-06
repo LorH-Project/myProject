@@ -6,7 +6,7 @@
     <select id="getUserList" resultType="org.demo.bedprojectbefore.pojo.User">
         SELECT * FROM `users` where 1=1
         <if test="nickName!=null and nickName!=''">
-            AND `nickName` LIKE connect ('%',#{nickName},'%')
+            AND `nickName` LIKE concat ('%',#{nickName},'%')
         </if>
         <if test="userPhone!=null and userPhone!=''">
             AND `userPhone` =#{userPhone}
@@ -21,7 +21,7 @@
     <select id="pageUserList" resultType="org.demo.bedprojectbefore.pojo.User">
         SELECT * FROM `users` where 1=1
         <if test="nickName!=null and nickName!=''">
-            AND `nickName` LIKE connect ('%',#{nickName},'%')
+            AND `nickName` LIKE concat ('%',#{nickName},'%')
         </if>
         <if test="userPhone!=null and userPhone!=''">
             AND `userPhone` =#{userPhone}
@@ -34,10 +34,10 @@
         </if>
         limit #{pageNo},#{pageSize}
     </select>
-    <select id="getPageUserCount" resultType="org.demo.bedprojectbefore.pojo.User">
+    <select id="getPageUserCount" resultType="int">
         SELECT count(*) FROM `users` where 1=1
         <if test="nickName!=null and nickName!=''">
-            AND `nickName` LIKE connect ('%',#{nickName},'%')
+            AND `nickName` LIKE concat ('%',#{nickName},'%')
         </if>
         <if test="userPhone!=null and userPhone!=''">
             AND `userPhone` =#{userPhone}

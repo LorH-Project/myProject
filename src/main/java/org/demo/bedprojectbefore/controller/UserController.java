@@ -1,6 +1,7 @@
 package org.demo.bedprojectbefore.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.demo.bedprojectbefore.config.Dto;
 import org.demo.bedprojectbefore.config.DtoUtil;
 import org.demo.bedprojectbefore.config.Page;
@@ -15,7 +16,6 @@ import java.util.List;
 
 @Api("用户管理")
 @RestController
-@RequestMapping(value = "user/*")
 @CrossOrigin
 public class UserController {
 
@@ -29,8 +29,8 @@ public class UserController {
         return "redirect:/userList";
     }
 
-    //查询用户列表
-    @GetMapping(value = "/getUserList")
+    @ApiOperation(httpMethod = "POST",value = "getUserList",notes = "查询用户列表")
+    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
     public Dto getUserList(String nickName, String userPhone, String isDeposit, String isFlag){
         List<User> userList=userSer.getUserList(nickName, userPhone, isDeposit, isFlag);
         if(userList!=null){
@@ -38,24 +38,25 @@ public class UserController {
         }
         return DtoUtil.returnSuccess("未查到数据","404");
     }
-    //分页查询用户列表
-    @GetMapping(value = "/pageUserList")
+
+    @ApiOperation(httpMethod = "POST",value = "pageUserList",notes = "分页查询用户列表")
+    @RequestMapping(value = "/pageUserList", method = RequestMethod.POST)
     public Dto pageUserList(String nickName, String userPhone, String isDeposit, String isFlag, @RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "3")Integer pageSize){
         List<User> userList=userSer.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
         if(userList!=null){
             Page<User> page=new Page<>();
             page.setPageNo(pageNo);
             page.setPageSize(pageSize);
-            page.setTotalCount(userSer.getPageUserCount(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize));
+            page.setTotalCount(userSer.getPageUserCount(nickName, userPhone, isDeposit, isFlag));
             page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
             page.setRows(userList);
             return DtoUtil.returnSuccess(page);
         }
-
         return DtoUtil.returnSuccess("未查到数据","404");
     }
-    //短信列表
-    @GetMapping(value = "/smsManagerList")
+
+    @ApiOperation(httpMethod = "POST",value = "smsManagerList",notes = "短信列表")
+    @RequestMapping(value = "/smsManagerList", method = RequestMethod.POST)
     public Dto smsManagerList(){
         return DtoUtil.returnSuccess("未查到数据","404");
     }
