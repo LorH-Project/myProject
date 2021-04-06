@@ -27,9 +27,19 @@ public class UserController {
         return "redirect:/userList";
     }
 
+    //查询用户列表
     @GetMapping(value = "/getUserList")
     public Dto getUserList(String nickName, String userPhone, String isDeposit, String isFlag){
         List<User> userList=userSer.getUserList(nickName, userPhone, isDeposit, isFlag);
+        if(userList!=null){
+            return DtoUtil.returnSuccess(userList);
+        }
+        return DtoUtil.returnSuccess("未查到数据","404");
+    }
+    //分页查询用户列表
+    @GetMapping(value = "/pageUserList")
+    public Dto pageUserList(String nickName, String userPhone, String isDeposit, String isFlag,Integer pageNo,Integer pageSize){
+        List<User> userList=userSer.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
         if(userList!=null){
             return DtoUtil.returnSuccess(userList);
         }

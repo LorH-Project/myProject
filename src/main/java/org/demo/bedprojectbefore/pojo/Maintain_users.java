@@ -2,7 +2,7 @@ package org.demo.bedprojectbefore.pojo;
 
 import java.util.Date;
 
-public class maintain_users {
+public class Maintain_users {
     private int maintainId;
     private int userId;
     private int agentId;
@@ -11,10 +11,10 @@ public class maintain_users {
     private int maintainType;
     private Date cTime;
 
-    public maintain_users() {
+    public Maintain_users() {
     }
 
-    public maintain_users(int maintainId, int userId, int agentId, String realName, String hospitalIds, int maintainType, Date cTime) {
+    public Maintain_users(int maintainId, int userId, int agentId, String realName, String hospitalIds, int maintainType, Date cTime) {
         this.maintainId = maintainId;
         this.userId = userId;
         this.agentId = agentId;
