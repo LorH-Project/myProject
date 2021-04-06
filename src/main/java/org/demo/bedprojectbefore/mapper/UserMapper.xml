@@ -34,4 +34,20 @@
         </if>
         limit #{pageNo},#{pageSize}
     </select>
+    <select id="getPageUserCount" resultType="org.demo.bedprojectbefore.pojo.User">
+        SELECT count(*) FROM `users` where 1=1
+        <if test="nickName!=null and nickName!=''">
+            AND `nickName` LIKE connect ('%',#{nickName},'%')
+        </if>
+        <if test="userPhone!=null and userPhone!=''">
+            AND `userPhone` =#{userPhone}
+        </if>
+        <if test="isDeposit!=null and isDeposit!=''">
+            AND `isDeposit`=#{isDeposit}
+        </if>
+        <if test="isFlag!=null and isFlag!=''">
+            AND `isFlag`=#{isFlag}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
 </mapper>

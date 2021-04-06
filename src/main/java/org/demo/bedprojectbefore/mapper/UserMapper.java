@@ -21,6 +21,12 @@ public interface UserMapper {
                                   @Param("isFlag") String isFlag,
                                   @Param("pageNo")Integer pageNo,
                                   @Param("pageSize")Integer pageSize);
+    public int getPageUserCount(@Param("nickName") String nickName,
+                               @Param("userPhone") String userPhone,
+                               @Param("isDeposit") String isDeposit,
+                               @Param("isFlag") String isFlag,
+                               @Param("pageNo")Integer pageNo,
+                               @Param("pageSize")Integer pageSize);
 
 
 }

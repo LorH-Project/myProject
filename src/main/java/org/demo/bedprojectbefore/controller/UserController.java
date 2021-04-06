@@ -3,13 +3,13 @@ package org.demo.bedprojectbefore.controller;
 import io.swagger.annotations.Api;
 import org.demo.bedprojectbefore.config.Dto;
 import org.demo.bedprojectbefore.config.DtoUtil;
+import org.demo.bedprojectbefore.config.Page;
+import org.demo.bedprojectbefore.pojo.Maintain_users;
 import org.demo.bedprojectbefore.pojo.User;
+import org.demo.bedprojectbefore.service.MainUserSer;
 import org.demo.bedprojectbefore.service.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +21,8 @@ public class UserController {
 
     @Autowired
     private UserSer userSer;
+    @Autowired
+    private MainUserSer mainUserSer;
 
     @GetMapping(value = "/selUser")
     public String selUser(){
@@ -38,10 +40,30 @@ public class UserController {
     }
     //分页查询用户列表
     @GetMapping(value = "/pageUserList")
-    public Dto pageUserList(String nickName, String userPhone, String isDeposit, String isFlag,Integer pageNo,Integer pageSize){
+    public Dto pageUserList(String nickName, String userPhone, String isDeposit, String isFlag, @RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "3")Integer pageSize){
         List<User> userList=userSer.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
         if(userList!=null){
-            return DtoUtil.returnSuccess(userList);
+            Page<User> page=new Page<>();
+            page.setPageNo(pageNo);
+            page.setPageSize(pageSize);
+            page.setTotalCount(userSer.getPageUserCount(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize));
+            page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
+            page.setRows(userList);
+            return DtoUtil.returnSuccess(page);
+        }
+
+        return DtoUtil.returnSuccess("未查到数据","404");
+    }
+    //短信列表
+    @GetMapping(value = "/smsManagerList")
+    public Dto smsManagerList(){
+        return DtoUtil.returnSuccess("未查到数据","404");
+    }
+    //维护人员列表查询
+    public Dto mainUserList(String realName,String userPhone,Integer agentId){
+        List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId);
+        if(maintainUsersList!=null){
+            return DtoUtil.returnSuccess(maintainUsersList);
         }
         return DtoUtil.returnSuccess("未查到数据","404");
     }

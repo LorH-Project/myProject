@@ -1,5 +1,6 @@
 package org.demo.bedprojectbefore.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.demo.bedprojectbefore.mapper.UserMapper;
 import org.demo.bedprojectbefore.pojo.User;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,13 @@ public class UserSer {
     }
     public List<User> pageUserList(String nickName, String userPhone, String isDeposit, String isFlag,Integer pageNo,Integer pageSize){
         return userMapper.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
+    }
+    public int getPageUserCount(@Param("nickName") String nickName,
+                               @Param("userPhone") String userPhone,
+                               @Param("isDeposit") String isDeposit,
+                               @Param("isFlag") String isFlag,
+                               @Param("pageNo")Integer pageNo,
+                               @Param("pageSize")Integer pageSize) {
+        return userMapper.getPageUserCount(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
     }
 }

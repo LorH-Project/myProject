@@ -1,11 +1,14 @@
 package org.demo.bedprojectbefore.config;
 
-public class Page {
+import java.util.List;
+
+public class Page<T> {
     private int pageNo=1;
     private int pageSize=3;
     private int totalCount=0;
     private int pageCount=0;
-    private Object data;
+    //数据
+    private List<T> rows;
 
     public int getPageNo() {
         return pageNo;
@@ -40,11 +43,11 @@ public class Page {
         this.pageCount = pageCount;
     }
 
-    public Object getData() {
-        return data;
+    public List<T> getRows() {
+        return rows;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setRows(List<T> rows) {
+        this.rows = rows;
     }
 }
