@@ -43,18 +43,20 @@ public class UserController {
     }
 
     @ApiOperation(httpMethod = "GET",value = "分页查询用户列表",notes = "分页查询用户列表")
-    @RequestMapping(value = "/pageUserList",method = RequestMethod.GET)
-    public Dto pageUserList(@RequestParam(defaultValue = "",required = false) String nickName,
-                            @RequestParam(defaultValue = "",required = false) String userPhone,
-                            @RequestParam(defaultValue = "",required = false) String isDeposit,
-                            @RequestParam(defaultValue = "",required = false) String isFlag,
-                            @RequestParam(defaultValue = "0")Integer pageNo,
-                            @RequestParam(defaultValue = "3")Integer pageSize){
-        List<User> userList=userSer.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
+    @RequestMapping(value = "/pageUserList")
+    public Dto pageUserList( String pageNo, String pageSize,String nickName,String userPhone, String isDeposit, String isFlag){
+        System.out.println("pageNo:"+pageNo+"pageSize:"+pageSize+"nickName:"+nickName+"userPhone:"+userPhone+"isDeposit:"+isDeposit+"isFlag："+isFlag);
+        if(pageNo==null){
+            pageNo="1";
+        }
+        if(pageSize==null){
+            pageSize="3";
+        }
+        List<User> userList=userSer.pageUserList(nickName, userPhone, isDeposit, isFlag, Integer.parseInt(pageNo), Integer.parseInt(pageSize));
         if(userList!=null){
             Page<User> page=new Page<>();
-            page.setPageNo(pageNo);
-            page.setPageSize(pageSize);
+            page.setPageNo(Integer.parseInt(pageNo));
+            page.setPageSize(Integer.parseInt(pageSize));
             page.setTotalCount(userSer.getPageUserCount(nickName, userPhone, isDeposit, isFlag));
             page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
             page.setRows(userList);

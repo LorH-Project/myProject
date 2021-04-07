@@ -11,10 +11,10 @@
         <if test="userPhone!=null and userPhone!=''">
             AND `userPhone` =#{userPhone}
         </if>
-        <if test="isDeposit!=null and isDeposit!=''">
+        <if test="isDeposit!=null and isDeposit!='' and isDeposit != 'undefined'">
             AND `isDeposit`=#{isDeposit}
         </if>
-        <if test="isFlag!=null and isFlag!=''">
+        <if test="isFlag!=null and isFlag!='' and isFlag != 'undefined'">
             AND `isFlag`=#{isFlag}
         </if>
     </select>
@@ -26,10 +26,10 @@
         <if test="userPhone!=null and userPhone!=''">
             AND `userPhone` =#{userPhone}
         </if>
-        <if test="isDeposit!=null and isDeposit!=''">
+        <if test="isDeposit!=null and isDeposit!='' and isDeposit != 'undefined'">
             AND `isDeposit`=#{isDeposit}
         </if>
-        <if test="isFlag!=null and isFlag!=''">
+        <if test="isFlag!=null and isFlag!='' and isDeposit != 'undefined'">
             AND `isFlag`=#{isFlag}
         </if>
         limit #{pageNo},#{pageSize}
@@ -40,12 +40,12 @@
             AND `nickName` LIKE concat ('%',#{nickName},'%')
         </if>
         <if test="userPhone!=null and userPhone!=''">
-            AND `userPhone` =#{userPhone}
+            AND `userPhone` = #{userPhone}
         </if>
-        <if test="isDeposit!=null and isDeposit!=''">
+        <if test="isDeposit!=null and isDeposit!='' and isDeposit != 'undefined'">
             AND `isDeposit`=#{isDeposit}
         </if>
-        <if test="isFlag!=null and isFlag!=''">
+        <if test="isFlag!=null and isFlag!='' and isDeposit != 'undefined'">
             AND `isFlag`=#{isFlag}
         </if>
     </select>
