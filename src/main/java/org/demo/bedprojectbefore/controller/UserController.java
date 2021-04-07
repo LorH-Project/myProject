@@ -91,18 +91,20 @@ public class UserController {
 
     @ApiOperation(httpMethod = "GET",value = "维护人员列表查询",notes = "维护人员列表查询")
     @RequestMapping(value = "/mainUserList",method = RequestMethod.GET)
-    public Dto mainUserList(@RequestParam(defaultValue = "",required = false) String realName,
-                            @RequestParam(defaultValue = "",required = false) String userPhone,
-                            @RequestParam(defaultValue = "0",required = false) Integer agentId,
-                            @RequestParam(defaultValue = "0")Integer pageNo,
-                            @RequestParam(defaultValue = "3")Integer pageSize){
+    public Dto mainUserList(String realName,String userPhone,Integer agentId,String pageNo,String pageSize){
+        if(pageNo==null){
+            pageNo="1";
+        }
+        if(pageSize==null){
+            pageSize="3";
+        }
         System.out.println(realName+" "+userPhone+" "+agentId+" "+pageNo+" "+pageSize);
-        List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, pageNo, pageSize);
+        List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, Integer.parseInt(pageNo), Integer.parseInt(pageSize));
         System.out.println(maintainUsersList);
         if(maintainUsersList!=null){
             Page<Maintain_users> page=new Page<>();
-            page.setPageNo(pageNo);
-            page.setPageSize(pageSize);
+            page.setPageNo(Integer.parseInt(pageNo));
+            page.setPageSize(Integer.parseInt(pageSize));
             page.setTotalCount(mainUserSer.getMainCount(realName, userPhone, agentId));
             page.setRows(maintainUsersList);
             page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);

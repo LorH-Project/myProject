@@ -3,5 +3,34 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.demo.bedprojectbefore.mapper.DeptMapper">
-
+    <select id="deptList" resultType="org.demo.bedprojectbefore.pojo.Dept">
+        SELECT `dept`.*,`hospital`.`hospitalName` FROM `dept`,`hospital`
+        WHERE `dept`.`hospitalId`=`hospital`.`hospitalId`
+        <if test="hospitalName!=null and hospitalName!=''">
+            AND `hospitalName` LIKE concat ('%',#{hospitalName},'%')
+        </if>
+        <if test="address!=null and address!=''">
+            AND `address` =#{address}
+        </if>
+        <if test="deptName!=null and deptName!=''">
+            AND `deptName`=#{deptName}
+        </if>
+        LIMIT #{pageNo},#{pageSize}
+    </select>
+    <select id="getDeptCount" resultType="int">
+        SELECT count(*) FROM `dept`,`hospital`
+        WHERE `dept`.`hospitalId`=`hospital`.`hospitalId`
+        <if test="hospitalName!=null and hospitalName!=''">
+            AND `hospitalName` LIKE concat ('%',#{hospitalName},'%')
+        </if>
+        <if test="address!=null and address!=''">
+            AND `address` =#{address}
+        </if>
+        <if test="deptName!=null and deptName!=''">
+            AND `deptName`=#{deptName}
+        </if>
+    </select>
+    <delete id="delDept">
+        delete from dept where deptId=#{deptId}
+    </delete>
 </mapper>
