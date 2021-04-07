@@ -33,5 +33,8 @@
             </if>
         </trim>
     </select>
+    <delete id="delMain">
+        delete from maintain_users where maintainId = #{maintainId}
+    </delete>
 
 </mapper>

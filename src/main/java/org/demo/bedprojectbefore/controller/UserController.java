@@ -6,8 +6,10 @@ import org.demo.bedprojectbefore.config.Dto;
 import org.demo.bedprojectbefore.config.DtoUtil;
 import org.demo.bedprojectbefore.config.Page;
 import org.demo.bedprojectbefore.pojo.Maintain_users;
+import org.demo.bedprojectbefore.pojo.Sms_message;
 import org.demo.bedprojectbefore.pojo.User;
 import org.demo.bedprojectbefore.service.MainUserSer;
+import org.demo.bedprojectbefore.service.SmsSer;
 import org.demo.bedprojectbefore.service.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,13 +26,10 @@ public class UserController {
     private UserSer userSer;
     @Autowired
     private MainUserSer mainUserSer;
+    @Autowired
+    private SmsSer smsSer;
 
-    @GetMapping(value = "/selUser")
-    public String selUser(){
-        return "redirect:/userList";
-    }
-
-    @ApiOperation(httpMethod = "GET",value = "getUserList",notes = "查询用户列表")
+    @ApiOperation(httpMethod = "GET",value = "查询用户列表",notes = "查询用户列表")
     @RequestMapping(value = "/getUserList",method = RequestMethod.GET)
     public Dto getUserList(@RequestParam(defaultValue = "",required = false) String nickName,
                            @RequestParam(defaultValue = "",required = false) String userPhone,
@@ -43,7 +42,7 @@ public class UserController {
         return DtoUtil.returnSuccess("未查到数据","404");
     }
 
-    @ApiOperation(httpMethod = "GET",value = "pageUserList",notes = "分页查询用户列表")
+    @ApiOperation(httpMethod = "GET",value = "分页查询用户列表",notes = "分页查询用户列表")
     @RequestMapping(value = "/pageUserList",method = RequestMethod.GET)
     public Dto pageUserList(@RequestParam(defaultValue = "",required = false) String nickName,
                             @RequestParam(defaultValue = "",required = false) String userPhone,
@@ -64,13 +63,31 @@ public class UserController {
         return DtoUtil.returnSuccess("未查到数据","404");
     }
 
-    @ApiOperation(httpMethod = "GET",value = "smsManagerList",notes = "短信列表")
+    @ApiOperation(httpMethod = "GET",value = "短信列表",notes = "短信列表")
     @RequestMapping(value = "/smsManagerList",method = RequestMethod.GET)
-    public Dto smsManagerList(){
+    public Dto smsManagerList(@RequestParam(defaultValue = "",required = false)String content,
+                              @RequestParam(defaultValue = "0")Integer pageNo,
+                              @RequestParam(defaultValue = "3")Integer pageSize){
+        List<Sms_message> smsList=smsSer.smsList(content, pageNo, pageSize);
+        if(smsList!=null){
+            Page<Sms_message> page=new Page<>();
+            page.setPageNo(pageNo);
+            page.setPageSize(pageSize);
+            page.setTotalCount(smsSer.getSmsCount(content));
+            page.setRows(smsList);
+            page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
+            return DtoUtil.returnSuccess(page);
+        }
         return DtoUtil.returnSuccess("未查到数据","404");
     }
 
-    @ApiOperation(httpMethod = "GET",value = "mainUserList",notes = "维护人员列表查询")
+    @ApiOperation(httpMethod = "GET",value = "删除短信",notes = "删除短信")
+    @RequestMapping(value = "/delSms",method = RequestMethod.GET)
+    public Dto delSms(@RequestParam("messageId")int messageId){
+           return DtoUtil.returnSuccess(smsSer.delSms(messageId));
+    }
+
+    @ApiOperation(httpMethod = "GET",value = "维护人员列表查询",notes = "维护人员列表查询")
     @RequestMapping(value = "/mainUserList",method = RequestMethod.GET)
     public Dto mainUserList(@RequestParam(defaultValue = "",required = false) String realName,
                             @RequestParam(defaultValue = "",required = false) String userPhone,
@@ -85,9 +102,21 @@ public class UserController {
             page.setPageNo(pageNo);
             page.setPageSize(pageSize);
             page.setTotalCount(mainUserSer.getMainCount(realName, userPhone, agentId));
+            page.setRows(maintainUsersList);
             page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
             return DtoUtil.returnSuccess(page);
         }
         return DtoUtil.returnSuccess("未查到数据","404");
     }
+
+    @ApiOperation(httpMethod = "GET",value = "删除维护人员",notes = "删除维护人员")
+    @RequestMapping(value = "/delMain",method = RequestMethod.GET)
+    public Dto delMain(@RequestParam("maintainIds")int maintainId){
+          return  DtoUtil.returnSuccess(mainUserSer.delMain(maintainId));
+    }
+
+
+
+
+
 }

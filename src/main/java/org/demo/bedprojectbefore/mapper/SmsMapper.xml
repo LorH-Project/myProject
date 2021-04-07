@@ -4,4 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.demo.bedprojectbefore.mapper.SmsMapper">
 
+    <select id="smsList" resultType="org.demo.bedprojectbefore.pojo.Sms_message">
+        SELECT * FROM `sms_message`
+        <where>
+            <if test="content!=null and content!=''">
+                `content` LIKE concat ('%',#{content},'%')
+            </if>
+        </where>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getSmsCount" resultType="int">
+        SELECT COUNT(*) FROM `sms_message`
+        <where>
+            <if test="content!=null and content!=''">
+                `content` LIKE concat ('%',#{content},'%')
+            </if>
+        </where>
+    </select>
+    <delete id="delSms">
+       DELETE
+        FROM
+          `chaperonebed`.`sms_message`
+        WHERE `messageId` = #{messageId}
+    </delete>
 </mapper>

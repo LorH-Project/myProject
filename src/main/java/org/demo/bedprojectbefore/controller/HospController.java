@@ -21,7 +21,7 @@ public class HospController {
     private HospSer hospSer;
 
 
-    @ApiOperation(httpMethod = "GET",value = "hospList",notes = "医院列表")
+    @ApiOperation(httpMethod = "GET",value = "医院列表",notes = "医院列表")
     @RequestMapping(value = "/hospList",method = RequestMethod.GET)
     public Dto hospList(@RequestParam(defaultValue = "",required = false) String hospitalName,
                         @RequestParam(defaultValue = "",required = false) String address,
@@ -46,7 +46,7 @@ public class HospController {
     }
 
 
-    @ApiOperation(httpMethod = "POST",value = "delHosp",notes = "删除医院")
+    @ApiOperation(httpMethod = "POST",value = "删除医院",notes = "删除医院")
     @RequestMapping(value = "/delHosp")
     public Dto delHosp(@RequestParam("id") int id){
         System.out.println(id);

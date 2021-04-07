@@ -18,7 +18,7 @@ public class LoginController {
     @Resource
     private ManagerSer managerSer;
 
-    @ApiOperation(httpMethod = "GET",value = "login",notes = "登录")
+    @ApiOperation(httpMethod = "GET",value = "登录",notes = "登录")
     @RequestMapping(value = "/login")
     public Dto login(@RequestParam("username") String username, @RequestParam("password") String password){
         System.out.println(username+" "+password);

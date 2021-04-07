@@ -23,4 +23,7 @@ public class MainUserSer {
                             @Param("agentId") Integer agentId){
         return maintainUsersMapper.getMainCount(realName, userPhone, agentId);
     }
+    public int delMain(@Param("maintainId") int maintainId){
+        return maintainUsersMapper.delMain(maintainId);
+    }
 }

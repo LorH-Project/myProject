@@ -25,5 +25,12 @@ public interface Maintain_users_Mapper {
                             @Param("userPhone") String userPhone,
                             @Param("agentId") Integer agentId);
 
+    /**
+     * 删除维护人员
+     * @param maintainId
+     * @return
+     */
+    public int delMain(@Param("maintainId") int maintainId);
+
 
 }
