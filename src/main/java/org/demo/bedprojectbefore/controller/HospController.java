@@ -21,8 +21,8 @@ public class HospController {
     private HospSer hospSer;
 
 
-    @ApiOperation(httpMethod = "POST",value = "hospList",notes = "医院列表")
-    @RequestMapping(value = "/hospList")
+    @ApiOperation(httpMethod = "GET",value = "hospList",notes = "医院列表")
+    @RequestMapping(value = "/hospList",method = RequestMethod.GET)
     public Dto hospList(@RequestParam(defaultValue = "",required = false) String hospitalName,
                         @RequestParam(defaultValue = "",required = false) String address,
                         @RequestParam(defaultValue = "",required = false) String linkName,

@@ -3,10 +3,10 @@ package org.demo.bedprojectbefore.config;
 import java.util.List;
 
 public class Page<T> {
-    private int pageNo=1;
-    private int pageSize=3;
-    private int totalCount=0;
-    private int pageCount=0;
+    private int pageNo;
+    private int pageSize;
+    private int totalCount;
+    private int pageCount;
     //数据
     private List<T> rows;
 
@@ -32,7 +32,6 @@ public class Page<T> {
 
     public void setTotalCount(int totalCount) {
         this.totalCount = totalCount;
-        this.pageCount=this.totalCount%this.pageSize==0?(totalCount/pageSize):(totalCount/pageSize+1);
     }
 
     public int getPageCount() {

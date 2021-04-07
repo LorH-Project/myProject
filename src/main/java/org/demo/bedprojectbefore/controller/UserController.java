@@ -30,8 +30,8 @@ public class UserController {
         return "redirect:/userList";
     }
 
-    @ApiOperation(httpMethod = "POST",value = "getUserList",notes = "查询用户列表")
-    @RequestMapping(value = "/getUserList")
+    @ApiOperation(httpMethod = "GET",value = "getUserList",notes = "查询用户列表")
+    @RequestMapping(value = "/getUserList",method = RequestMethod.GET)
     public Dto getUserList(@RequestParam(defaultValue = "",required = false) String nickName,
                            @RequestParam(defaultValue = "",required = false) String userPhone,
                            @RequestParam(defaultValue = "",required = false) String isDeposit,
@@ -43,8 +43,8 @@ public class UserController {
         return DtoUtil.returnSuccess("未查到数据","404");
     }
 
-    @ApiOperation(httpMethod = "POST",value = "pageUserList",notes = "分页查询用户列表")
-    @RequestMapping(value = "/pageUserList")
+    @ApiOperation(httpMethod = "GET",value = "pageUserList",notes = "分页查询用户列表")
+    @RequestMapping(value = "/pageUserList",method = RequestMethod.GET)
     public Dto pageUserList(@RequestParam(defaultValue = "",required = false) String nickName,
                             @RequestParam(defaultValue = "",required = false) String userPhone,
                             @RequestParam(defaultValue = "",required = false) String isDeposit,
@@ -64,14 +64,14 @@ public class UserController {
         return DtoUtil.returnSuccess("未查到数据","404");
     }
 
-    @ApiOperation(httpMethod = "POST",value = "smsManagerList",notes = "短信列表")
-    @RequestMapping(value = "/smsManagerList")
+    @ApiOperation(httpMethod = "GET",value = "smsManagerList",notes = "短信列表")
+    @RequestMapping(value = "/smsManagerList",method = RequestMethod.GET)
     public Dto smsManagerList(){
         return DtoUtil.returnSuccess("未查到数据","404");
     }
 
-    @ApiOperation(httpMethod = "POST",value = "mainUserList",notes = "维护人员列表查询")
-    @RequestMapping(value = "/mainUserList")
+    @ApiOperation(httpMethod = "GET",value = "mainUserList",notes = "维护人员列表查询")
+    @RequestMapping(value = "/mainUserList",method = RequestMethod.GET)
     public Dto mainUserList(@RequestParam(defaultValue = "",required = false) String realName,
                             @RequestParam(defaultValue = "",required = false) String userPhone,
                             @RequestParam(defaultValue = "0",required = false) Integer agentId,
