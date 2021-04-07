@@ -19,7 +19,7 @@ public class LoginController {
     private ManagerSer managerSer;
 
     @ApiOperation(httpMethod = "GET",value = "login",notes = "登录")
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login")
     public Dto login(@RequestParam("username") String username, @RequestParam("password") String password){
         System.out.println(username+" "+password);
         Sys_manager manager=managerSer.login(username,password);

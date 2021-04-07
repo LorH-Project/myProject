@@ -18,8 +18,13 @@ public interface Maintain_users_Mapper {
      */
     public List<Maintain_users> mainUserList(@Param("realName") String realName,
                                              @Param("userPhone") String userPhone,
-                                             @Param("agentId") Integer agentId);
+                                             @Param("agentId") Integer agentId,
+                                             @Param("pageNo")Integer pageNo,
+                                             @Param("pageSize")Integer pageSize);
 
+    public int getMainCount(@Param("realName") String realName,
+                            @Param("userPhone") String userPhone,
+                            @Param("agentId") Integer agentId);
 
 
 }

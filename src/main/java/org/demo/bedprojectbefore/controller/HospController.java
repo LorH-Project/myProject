@@ -22,16 +22,24 @@ public class HospController {
 
 
     @ApiOperation(httpMethod = "POST",value = "hospList",notes = "医院列表")
-    @RequestMapping(value = "/hospList" , method = RequestMethod.POST)
-    public Dto hospList(String hospitalName, String address, String linkName, String linkPhone, String companyName, @RequestParam(defaultValue = "1")Integer pageNo, @RequestParam(defaultValue = "3")Integer pageSize){
+    @RequestMapping(value = "/hospList")
+    public Dto hospList(@RequestParam(defaultValue = "",required = false) String hospitalName,
+                        @RequestParam(defaultValue = "",required = false) String address,
+                        @RequestParam(defaultValue = "",required = false) String linkName,
+                        @RequestParam(defaultValue = "",required = false) String linkPhone,
+                        @RequestParam(defaultValue = "",required = false) String companyName,
+                        @RequestParam(defaultValue = "0")Integer pageNo,
+                        @RequestParam(defaultValue = "3")Integer pageSize){
+        System.out.println(hospitalName+" "+address+" "+linkName+" "+linkPhone+" "+companyName);
         List<Hospital> hospitalList=hospSer.hospList(hospitalName, address, linkName, linkPhone, companyName, pageNo, pageSize);
+        System.out.println(hospitalList);
         if(hospitalList!=null){
             Page<Hospital> page=new Page<>();
             page.setPageNo(pageNo);
             page.setPageSize(pageSize);
             page.setTotalCount(hospSer.getHospCount(hospitalName, address, linkName, linkPhone, companyName));
             page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
-            page.setRows(hospSer.hospList(hospitalName, address, linkName, linkPhone, companyName, pageNo, pageSize));
+            page.setRows(hospitalList);
             return DtoUtil.returnSuccess(page);
         }
         return DtoUtil.returnSuccess("未查到数据","404");
@@ -39,8 +47,9 @@ public class HospController {
 
 
     @ApiOperation(httpMethod = "POST",value = "delHosp",notes = "删除医院")
-    @RequestMapping(value = "/delHosp", method = RequestMethod.POST)
-    public Dto delHosp(int id){
+    @RequestMapping(value = "/delHosp")
+    public Dto delHosp(@RequestParam("id") int id){
+        System.out.println(id);
         int result=hospSer.delHosp(id);
         if(result>0){
             return DtoUtil.returnSuccess(hospSer.delHosp(id));

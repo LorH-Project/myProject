@@ -24,7 +24,7 @@
         </if>
         LIMIT #{pageNo},#{pageSize}
     </select>
-    <select id="getHospCount" resultType="org.demo.bedprojectbefore.pojo.Hospital">
+    <select id="getHospCount" resultType="int">
         SELECT count(*) FROM `hospital`,`agent` WHERE `agent`.`agentId`=`hospital`.`agentId`
         <if test="hospitalName!=null and hospitalName!=''">
             AND `hospitalName` =#{hospitalName}
@@ -43,6 +43,6 @@
         </if>
     </select>
     <delete id="delHosp">
-        delete from hospital where hospitalId = #{hospitalId}
+        delete from hospital where hospitalId = #{id}
     </delete>
 </mapper>

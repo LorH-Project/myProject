@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @ApiOperation(httpMethod = "POST",value = "getUserList",notes = "查询用户列表")
-    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
+    @RequestMapping(value = "/getUserList")
     public Dto getUserList(@RequestParam(defaultValue = "",required = false) String nickName,
                            @RequestParam(defaultValue = "",required = false) String userPhone,
                            @RequestParam(defaultValue = "",required = false) String isDeposit,
@@ -44,12 +44,12 @@ public class UserController {
     }
 
     @ApiOperation(httpMethod = "POST",value = "pageUserList",notes = "分页查询用户列表")
-    @RequestMapping(value = "/pageUserList", method = RequestMethod.POST)
+    @RequestMapping(value = "/pageUserList")
     public Dto pageUserList(@RequestParam(defaultValue = "",required = false) String nickName,
                             @RequestParam(defaultValue = "",required = false) String userPhone,
                             @RequestParam(defaultValue = "",required = false) String isDeposit,
                             @RequestParam(defaultValue = "",required = false) String isFlag,
-                            @RequestParam(defaultValue = "1")Integer pageNo,
+                            @RequestParam(defaultValue = "0")Integer pageNo,
                             @RequestParam(defaultValue = "3")Integer pageSize){
         List<User> userList=userSer.pageUserList(nickName, userPhone, isDeposit, isFlag, pageNo, pageSize);
         if(userList!=null){
@@ -65,15 +65,28 @@ public class UserController {
     }
 
     @ApiOperation(httpMethod = "POST",value = "smsManagerList",notes = "短信列表")
-    @RequestMapping(value = "/smsManagerList", method = RequestMethod.POST)
+    @RequestMapping(value = "/smsManagerList")
     public Dto smsManagerList(){
         return DtoUtil.returnSuccess("未查到数据","404");
     }
-    //维护人员列表查询
-    public Dto mainUserList(String realName,String userPhone,Integer agentId){
-        List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId);
+
+    @ApiOperation(httpMethod = "POST",value = "mainUserList",notes = "维护人员列表查询")
+    @RequestMapping(value = "/mainUserList")
+    public Dto mainUserList(@RequestParam(defaultValue = "",required = false) String realName,
+                            @RequestParam(defaultValue = "",required = false) String userPhone,
+                            @RequestParam(defaultValue = "0",required = false) Integer agentId,
+                            @RequestParam(defaultValue = "0")Integer pageNo,
+                            @RequestParam(defaultValue = "3")Integer pageSize){
+        System.out.println(realName+" "+userPhone+" "+agentId+" "+pageNo+" "+pageSize);
+        List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, pageNo, pageSize);
+        System.out.println(maintainUsersList);
         if(maintainUsersList!=null){
-            return DtoUtil.returnSuccess(maintainUsersList);
+            Page<Maintain_users> page=new Page<>();
+            page.setPageNo(pageNo);
+            page.setPageSize(pageSize);
+            page.setTotalCount(mainUserSer.getMainCount(realName, userPhone, agentId));
+            page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
+            return DtoUtil.returnSuccess(page);
         }
         return DtoUtil.returnSuccess("未查到数据","404");
     }
