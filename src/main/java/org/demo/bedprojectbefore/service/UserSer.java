@@ -17,9 +17,12 @@ public class UserSer {
     public List<User> getUserList(String nickName, String userPhone, String isDeposit, String isFlag) {
         return userMapper.getUserList(nickName,userPhone,isDeposit,isFlag);
     }
+
+
     public List<User> pageUserList(String nickName, String userPhone, String isDeposit, String isFlag,Integer pageNo,Integer pageSize){
         return userMapper.pageUserList(nickName, userPhone, isDeposit, isFlag, (pageNo-1)*pageSize, pageSize);
     }
+
 
     public int getPageUserCount(@Param("nickName") String nickName,
                                 @Param("userPhone") String userPhone,

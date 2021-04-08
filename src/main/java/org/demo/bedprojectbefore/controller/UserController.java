@@ -1,6 +1,7 @@
 package org.demo.bedprojectbefore.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.demo.bedprojectbefore.config.Dto;
 import org.demo.bedprojectbefore.config.DtoUtil;
 import org.demo.bedprojectbefore.config.Page;
@@ -44,7 +45,12 @@ public class UserController {
 
     @ApiOperation(httpMethod = "GET",value = "分页查询用户列表",notes = "分页查询用户列表")
     @RequestMapping(value = "/pageUserList")
-    public Dto pageUserList( String pageNo, String pageSize,String nickName,String userPhone, String isDeposit, String isFlag){
+    public Dto pageUserList(@Param("pageNo") String pageNo,
+                            @Param("pageSize") String pageSize,
+                            @RequestParam(defaultValue = "",required = false) String nickName,
+                            @RequestParam(defaultValue = "",required = false) String userPhone,
+                            @RequestParam(defaultValue = "",required = false) String isDeposit,
+                            @RequestParam(defaultValue = "",required = false) String isFlag){
         System.out.println("pageNo:"+pageNo+"pageSize:"+pageSize+"nickName:"+nickName+"userPhone:"+userPhone+"isDeposit:"+isDeposit+"isFlag："+isFlag);
         if(pageNo==null){
             pageNo="1";
