@@ -28,7 +28,7 @@ public class HospController {
 
 
     @ApiOperation(httpMethod = "GET",value = "医院列表",notes = "医院列表")
-    @RequestMapping(value = "/hospList",method = RequestMethod.GET)
+    @RequestMapping(value = "/hospList")
     public Dto hospList(@RequestParam(defaultValue = "",required = false) String hospitalName,
                         @RequestParam(defaultValue = "",required = false) String address,
                         @RequestParam(defaultValue = "",required = false) String linkName,
@@ -53,7 +53,7 @@ public class HospController {
 
 
     @ApiOperation(httpMethod = "GET",value = "删除医院",notes = "删除医院")
-    @RequestMapping(value = "/delHosp",method = RequestMethod.GET)
+    @RequestMapping(value = "/delHosp")
     public Dto delHosp(@RequestParam("id") int id){
         System.out.println(id);
         int result=hospSer.delHosp(id);
@@ -64,7 +64,7 @@ public class HospController {
     }
 
     @ApiOperation(httpMethod = "GET",value = "科室列表",notes = "科室列表")
-    @RequestMapping(value = "/deptList",method = RequestMethod.GET)
+    @RequestMapping(value = "/deptList")
     public Dto deptList(@RequestParam(defaultValue = "",required = false)String hospitalName,
                         @RequestParam(defaultValue = "",required = false)String address,
                         @RequestParam(defaultValue = "",required = false)String deptName,
@@ -84,7 +84,7 @@ public class HospController {
     }
 
     @ApiOperation(httpMethod = "GET",value = "删除科室",notes = "删除科室")
-    @RequestMapping(value = "/delDept",method = RequestMethod.GET)
+    @RequestMapping(value = "/delDept")
     public Dto delDept(@RequestParam("id") int id) {
         return DtoUtil.returnSuccess(deptSer.delDept(id));
     }

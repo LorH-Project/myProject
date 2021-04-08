@@ -22,7 +22,7 @@ public class DeviceController {
     private GoodSer goodSer;
 
     @ApiOperation(httpMethod = "GET",value = "商品列表",notes = "商品列表")
-    @RequestMapping(value = "/goodList",method = RequestMethod.GET)
+    @RequestMapping(value = "/goodList")
     public Dto goodList(@RequestParam(defaultValue = "",required = false) String goodsName,
                         @RequestParam(defaultValue = "",required = false) String goodsManufactor,
                         @RequestParam(defaultValue = "",required = false) String start,
@@ -49,7 +49,7 @@ public class DeviceController {
     }
 
     @ApiOperation(httpMethod = "GET",value ="删除商品",notes = "删除商品")
-    @RequestMapping(value = "/delGood",method = RequestMethod.GET)
+    @RequestMapping(value = "/delGood")
     public Dto delGood(@RequestParam("id")int id){
         return DtoUtil.returnSuccess(goodSer.delGood(id));
     }

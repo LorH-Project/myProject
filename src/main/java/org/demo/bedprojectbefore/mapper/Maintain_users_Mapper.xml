@@ -14,13 +14,14 @@
                 AND  userPhone=#{userPhone}
             </if>
             <if test="agentId!=null and agentId!=''">
-                AND agentId=#{agentId}
+                AND us.agentId=#{agentId}
             </if>
         </trim>
         LIMIT #{pageNo},#{pageSize}
     </select>
     <select id="getMainCount" resultType="int">
-        select count(*) from maintain_users
+        SELECT count(*) FROM `maintain_users` ms INNER JOIN `users` us ON ms.userId=us.`userId`
+        INNER JOIN agent ag ON ms.agentId=ag.agentId
         <trim prefix="where" prefixOverrides="and|or">
             <if test="realName!=null and realName!=''">
                 realName LIKE CONCAT ('%',#{realName},'%')
@@ -29,7 +30,7 @@
                 AND  userPhone=#{userPhone}
             </if>
             <if test="agentId!=null and agentId!=''">
-                AND agentId=#{agentId}
+                AND us.agentId=#{agentId}
             </if>
         </trim>
     </select>

@@ -31,7 +31,7 @@ public class UserController {
     private SmsSer smsSer;
 
     @ApiOperation(httpMethod = "GET",value = "查询用户列表",notes = "查询用户列表")
-    @RequestMapping(value = "/getUserList",method = RequestMethod.GET)
+    @RequestMapping(value = "/getUserList")
     public Dto getUserList(@RequestParam(defaultValue = "",required = false) String nickName,
                            @RequestParam(defaultValue = "",required = false) String userPhone,
                            @RequestParam(defaultValue = "",required = false) String isDeposit,
@@ -72,7 +72,7 @@ public class UserController {
     }
 
     @ApiOperation(httpMethod = "GET",value = "短信列表",notes = "短信列表")
-    @RequestMapping(value = "/smsManagerList",method = RequestMethod.GET)
+    @RequestMapping(value = "/smsManagerList")
     public Dto smsManagerList(@RequestParam(defaultValue = "",required = false)String content,
                               @RequestParam(defaultValue = "0")Integer pageNo,
                               @RequestParam(defaultValue = "3")Integer pageSize){
@@ -90,13 +90,13 @@ public class UserController {
     }
 
     @ApiOperation(httpMethod = "GET",value = "删除短信",notes = "删除短信")
-    @RequestMapping(value = "/delSms",method = RequestMethod.GET)
+    @RequestMapping(value = "/delSms")
     public Dto delSms(@RequestParam("messageId")int messageId){
            return DtoUtil.returnSuccess(smsSer.delSms(messageId));
     }
 
     @ApiOperation(httpMethod = "GET",value = "维护人员列表查询",notes = "维护人员列表查询")
-    @RequestMapping(value = "/mainUserList",method = RequestMethod.GET)
+    @RequestMapping(value = "/mainUserList")
     public Dto mainUserList(@RequestParam(defaultValue = "",required = false) String realName,
                             @RequestParam(defaultValue = "",required = false) String userPhone,
                             @RequestParam(defaultValue = "",required = false) Integer agentId,
@@ -118,7 +118,7 @@ public class UserController {
     }
 
     @ApiOperation(httpMethod = "GET",value = "删除维护人员",notes = "删除维护人员")
-    @RequestMapping(value = "/delMain",method = RequestMethod.GET)
+    @RequestMapping(value = "/delMain")
     public Dto delMain(@RequestParam("maintainIds")int maintainId){
           return  DtoUtil.returnSuccess(mainUserSer.delMain(maintainId));
     }
