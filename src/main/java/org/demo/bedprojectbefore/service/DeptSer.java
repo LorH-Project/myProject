@@ -17,7 +17,7 @@ public class DeptSer {
     public List<Dept> deptList(@Param("hospitalName")String hospitalName, @Param("address") String address,
                                @Param("deptName")String deptName, @Param("pageNo")Integer pageNo,
                                @Param("pageSize")Integer pageSize){
-        return deptMapper.deptList(hospitalName, address, deptName, pageNo, pageSize);
+        return deptMapper.deptList(hospitalName, address, deptName, (pageNo-1)*pageSize, pageSize);
     }
 
     public int getDeptCount(@Param("hospitalName")String hospitalName,@Param("address") String address,

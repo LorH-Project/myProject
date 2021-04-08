@@ -1,10 +1,10 @@
 package org.demo.bedprojectbefore.controller;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.demo.bedprojectbefore.config.Dto;
 import org.demo.bedprojectbefore.config.DtoUtil;
 import org.demo.bedprojectbefore.config.Page;
+
 import org.demo.bedprojectbefore.pojo.Maintain_users;
 import org.demo.bedprojectbefore.pojo.Sms_message;
 import org.demo.bedprojectbefore.pojo.User;
@@ -91,13 +91,11 @@ public class UserController {
 
     @ApiOperation(httpMethod = "GET",value = "维护人员列表查询",notes = "维护人员列表查询")
     @RequestMapping(value = "/mainUserList",method = RequestMethod.GET)
-    public Dto mainUserList(String realName,String userPhone,Integer agentId,String pageNo,String pageSize){
-        if(pageNo==null){
-            pageNo="1";
-        }
-        if(pageSize==null){
-            pageSize="3";
-        }
+    public Dto mainUserList(@RequestParam(defaultValue = "",required = false) String realName,
+                            @RequestParam(defaultValue = "",required = false) String userPhone,
+                            @RequestParam(defaultValue = "",required = false) Integer agentId,
+                            @RequestParam(defaultValue = "1") String pageNo,
+                            @RequestParam(defaultValue = "3") String pageSize){
         System.out.println(realName+" "+userPhone+" "+agentId+" "+pageNo+" "+pageSize);
         List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, Integer.parseInt(pageNo), Integer.parseInt(pageSize));
         System.out.println(maintainUsersList);

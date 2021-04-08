@@ -34,7 +34,7 @@ public class HospController {
                         @RequestParam(defaultValue = "",required = false) String linkName,
                         @RequestParam(defaultValue = "",required = false) String linkPhone,
                         @RequestParam(defaultValue = "",required = false) String companyName,
-                        @RequestParam(defaultValue = "0")Integer pageNo,
+                        @RequestParam(defaultValue = "1")Integer pageNo,
                         @RequestParam(defaultValue = "3")Integer pageSize){
         System.out.println(hospitalName+" "+address+" "+linkName+" "+linkPhone+" "+companyName);
         List<Hospital> hospitalList=hospSer.hospList(hospitalName, address, linkName, linkPhone, companyName, pageNo, pageSize);
@@ -65,9 +65,11 @@ public class HospController {
 
     @ApiOperation(httpMethod = "GET",value = "科室列表",notes = "科室列表")
     @RequestMapping(value = "/deptList",method = RequestMethod.GET)
-    public Dto deptList(String hospitalName,String address,
-                        String deptName,Integer pageNo,
-                        Integer pageSize){
+    public Dto deptList(@RequestParam(defaultValue = "",required = false)String hospitalName,
+                        @RequestParam(defaultValue = "",required = false)String address,
+                        @RequestParam(defaultValue = "",required = false)String deptName,
+                        @RequestParam(defaultValue = "1")Integer pageNo,
+                        @RequestParam(defaultValue = "3")Integer pageSize){
         List<Dept> deptList=deptSer.deptList(hospitalName, address, deptName, pageNo, pageSize);
         if(deptList!=null){
             Page<Dept> page=new Page<>();
@@ -82,7 +84,8 @@ public class HospController {
     }
 
     @ApiOperation(httpMethod = "GET",value = "删除科室",notes = "删除科室")
-    public Dto delDept(@RequestParam("id") int id){
+    @RequestMapping(value = "/delDept",method = RequestMethod.GET)
+    public Dto delDept(@RequestParam("id") int id) {
         return DtoUtil.returnSuccess(deptSer.delDept(id));
     }
 

@@ -15,6 +15,7 @@
         <if test="deptName!=null and deptName!=''">
             AND `deptName`=#{deptName}
         </if>
+        ORDER BY deptId ASC
         LIMIT #{pageNo},#{pageSize}
     </select>
     <select id="getDeptCount" resultType="int">

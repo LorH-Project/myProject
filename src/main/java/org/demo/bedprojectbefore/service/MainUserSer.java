@@ -15,7 +15,7 @@ public class MainUserSer {
     private Maintain_users_Mapper maintainUsersMapper;
 
     public List<Maintain_users> mainUserList(String realName,String userPhone,Integer agentId,Integer pageNo,Integer pageSize){
-        return maintainUsersMapper.mainUserList(realName, userPhone, agentId,pageNo,pageSize);
+        return maintainUsersMapper.mainUserList(realName, userPhone, agentId,(pageNo-1)*pageSize,pageSize);
     }
 
     public int getMainCount(@Param("realName") String realName,

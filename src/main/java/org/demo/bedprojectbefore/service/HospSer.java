@@ -21,7 +21,7 @@ public class HospSer {
                                    @Param("companyName") String companyName,
                                    @Param("pageNo")Integer pageNo,
                                    @Param("pageSize")Integer pageSize) {
-        return hospitalMapper.hospList(hospitalName, address, linkName, linkPhone, companyName, pageNo, pageSize);
+        return hospitalMapper.hospList(hospitalName, address, linkName, linkPhone, companyName, (pageNo-1)*pageSize, pageSize);
     }
 
     public int getHospCount(@Param("hospitalName") String hospitalName,

@@ -8,13 +8,13 @@
         INNER JOIN agent ag ON ms.agentId=ag.agentId
         <trim prefix="where" prefixOverrides="and|or">
             <if test="realName!=null and realName!=''">
-                ms.realName LIKE CONCAT ('%',#{realName},'%')
+                realName LIKE CONCAT ('%',#{realName},'%')
             </if>
             <if test="userPhone!=null and userPhone!=''">
-                AND  us.userPhone=#{userPhone}
+                AND  userPhone=#{userPhone}
             </if>
             <if test="agentId!=null and agentId!=''">
-                AND ms.agentId=#{agentId}
+                AND agentId=#{agentId}
             </if>
         </trim>
         LIMIT #{pageNo},#{pageSize}
@@ -23,13 +23,13 @@
         select count(*) from maintain_users
         <trim prefix="where" prefixOverrides="and|or">
             <if test="realName!=null and realName!=''">
-                ms.realName LIKE CONCAT ('%',#{realName},'%')
+                realName LIKE CONCAT ('%',#{realName},'%')
             </if>
             <if test="userPhone!=null and userPhone!=''">
-                AND  us.userPhone=#{userPhone}
+                AND  userPhone=#{userPhone}
             </if>
             <if test="agentId!=null and agentId!=''">
-                AND ms.agentId=#{agentId}
+                AND agentId=#{agentId}
             </if>
         </trim>
     </select>

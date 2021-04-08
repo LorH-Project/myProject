@@ -17,7 +17,7 @@ public class SmsSer {
     public List<Sms_message> smsList(@Param("content") String content,
                                      @Param("pageNo")Integer pageNo,
                                      @Param("pageSize")Integer pageSize){
-        return smsMapper.smsList(content,pageNo,pageSize);
+        return smsMapper.smsList(content,(pageNo-1)*pageSize,pageSize);
     }
 
     public int getSmsCount(@Param("content") String content) {
