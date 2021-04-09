@@ -10,6 +10,8 @@ public class Maintain_users {
     private String hospitalIds;
     private int maintainType;
     private Date cTime;
+    private String userPhone;
+    private String companyName;
 
     public Maintain_users() {
     }
@@ -22,6 +24,22 @@ public class Maintain_users {
         this.hospitalIds = hospitalIds;
         this.maintainType = maintainType;
         this.cTime = cTime;
+    }
+
+    public String getUserPhone() {
+        return userPhone;
+    }
+
+    public void setUserPhone(String userPhone) {
+        this.userPhone = userPhone;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public int getMaintainId() {

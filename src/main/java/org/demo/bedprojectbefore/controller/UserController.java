@@ -104,7 +104,6 @@ public class UserController {
                             @RequestParam(defaultValue = "3") String pageSize){
         System.out.println(realName+" "+userPhone+" "+agentId+" "+pageNo+" "+pageSize);
         List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, Integer.parseInt(pageNo), Integer.parseInt(pageSize));
-        System.out.println(maintainUsersList);
         if(maintainUsersList!=null){
             Page<Maintain_users> page=new Page<>();
             page.setPageNo(Integer.parseInt(pageNo));
