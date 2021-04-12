@@ -35,6 +35,13 @@
             </if>
         </trim>
     </select>
+    <select id="getHospitalList" resultType="String">
+        SELECT hospitalName FROM hospital WHERE hospital.`hospitalId` IN
+        <foreach item="item" index="index" collection="hospitalIds"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
     <delete id="delMain">
         delete from maintain_users where maintainId = #{maintainId}
     </delete>

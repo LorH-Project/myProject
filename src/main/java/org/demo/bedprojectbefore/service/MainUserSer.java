@@ -2,6 +2,7 @@ package org.demo.bedprojectbefore.service;
 
 import org.apache.ibatis.annotations.Param;
 import org.demo.bedprojectbefore.mapper.Maintain_users_Mapper;
+import org.demo.bedprojectbefore.pojo.Agent;
 import org.demo.bedprojectbefore.pojo.Maintain_users;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,14 @@ public class MainUserSer {
                             @Param("agentId") Integer agentId){
         return maintainUsersMapper.getMainCount(realName, userPhone, agentId);
     }
+
+    public List<String> getHospitalList(@Param("hospitalIds") String[] hospitalIds){
+        return maintainUsersMapper.getHospitalList(hospitalIds);
+    }
+
     public int delMain(@Param("maintainId") int maintainId){
         return maintainUsersMapper.delMain(maintainId);
     }
+
+
 }

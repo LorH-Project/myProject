@@ -2,6 +2,7 @@ package org.demo.bedprojectbefore.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.demo.bedprojectbefore.pojo.Agent;
 import org.demo.bedprojectbefore.pojo.Maintain_users;
 
 import java.util.List;
@@ -26,11 +27,19 @@ public interface Maintain_users_Mapper {
                             @Param("agentId") Integer agentId);
 
     /**
+     *负责医院
+     * @param hospitalIds
+     * @return
+     */
+    List<String> getHospitalList(@Param("hospitalIds") String[] hospitalIds);
+
+    /**
      * 删除维护人员
      * @param maintainId
      * @return
      */
     public int delMain(@Param("maintainId") int maintainId);
+
 
 
 }

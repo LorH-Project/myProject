@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.ReplenMapper">
+    <select id="getReplenishmentList" resultType="org.demo.bedprojectbefore.pojo.Replenishment_Record">
+        SELECT replenishment_record.*,hospital.`hospitalName` hospitalName,agent.`companyName` companyName,goods.`goodsName` goodsName,goods.`goodsSpec` goodsSpec,
+        goods.`goodsManufactor` goodsManufactor,goods.`goodsRegistration` goodsRegistration
+        FROM `replenishment_record`,`hospital`,`agent`,`goods`
+        WHERE replenishment_record.`hospitalId` = hospital.`hospitalId`
+        AND replenishment_record.`goodsId` = goods.`goodsId`
+        AND hospital.`agentId` = agent.`agentId`
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber = #{deviceNumber}
+        </if>
+        <if test="hospitalName != null and hospitalName != ''">
+            and hospitalName = #{hospitalName}
+        </if>
+        <if test="agentId != 0">
+            and hospital.agentId = #{agentId}
+        </if>
+        <if test="goodsName != null and goodsName != ''">
+            and goodsName = #{goodsName}
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone = #{userPhone}
+        </if>
+        <if test="replenishmentType != 0">
+            and replenishmentType = #{replenishmentType}
+        </if>
+        <if test="start != null and start != null and start != 'undefined'">
+            and replenishment_record.cTime between #{start} and #{end}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getReplenishmentCount" resultType="int">
+        SELECT count(*)
+        FROM `replenishment_record`,`hospital`,`agent`,`goods`
+        WHERE replenishment_record.`hospitalId` = hospital.`hospitalId`
+        AND replenishment_record.`goodsId` = goods.`goodsId`
+        AND hospital.`agentId` = agent.`agentId`
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber = #{deviceNumber}
+        </if>
+        <if test="hospitalName != null and hospitalName != ''">
+            and hospitalName = #{hospitalName}
+        </if>
+        <if test="agentId != 0">
+            and hospital.agentId = #{agentId}
+        </if>
+        <if test="goodsName != null and goodsName != ''">
+            and goodsName = #{goodsName}
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone = #{userPhone}
+        </if>
+        <if test="replenishmentType != 0">
+            and replenishmentType = #{replenishmentType}
+        </if>
+        <if test="start != null and start != null and start != 'undefined'">
+            and replenishment_record.cTime between #{start} and #{end}
+        </if>
+    </select>
+</mapper>

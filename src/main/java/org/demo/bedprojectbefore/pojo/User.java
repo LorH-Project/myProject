@@ -1,5 +1,7 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class User {
@@ -11,6 +13,7 @@ public class User {
     private String openId;
     private Integer isDeposit;
     private Integer isFlag;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
     private Integer agentId;
 

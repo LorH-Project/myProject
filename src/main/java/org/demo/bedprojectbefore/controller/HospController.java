@@ -7,13 +7,20 @@ import org.demo.bedprojectbefore.config.Dto;
 import org.demo.bedprojectbefore.config.DtoUtil;
 import org.demo.bedprojectbefore.config.Page;
 import org.demo.bedprojectbefore.pojo.Dept;
+import org.demo.bedprojectbefore.pojo.Goods;
 import org.demo.bedprojectbefore.pojo.Hospital;
+import org.demo.bedprojectbefore.pojo.Replenishment_Record;
 import org.demo.bedprojectbefore.service.DeptSer;
 import org.demo.bedprojectbefore.service.HospSer;
+import org.demo.bedprojectbefore.service.ReplenSer;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Api("医院管理")
 @RestController
@@ -87,7 +94,5 @@ public class HospController {
     public Dto delDept(@RequestParam("id") int id) {
         return DtoUtil.returnSuccess(deptSer.delDept(id));
     }
-
-
 
 }

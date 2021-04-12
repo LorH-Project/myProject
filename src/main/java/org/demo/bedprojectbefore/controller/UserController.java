@@ -6,6 +6,7 @@ import org.demo.bedprojectbefore.config.Dto;
 import org.demo.bedprojectbefore.config.DtoUtil;
 import org.demo.bedprojectbefore.config.Page;
 
+import org.demo.bedprojectbefore.pojo.Agent;
 import org.demo.bedprojectbefore.pojo.Maintain_users;
 import org.demo.bedprojectbefore.pojo.Sms_message;
 import org.demo.bedprojectbefore.pojo.User;
@@ -103,6 +104,10 @@ public class UserController {
                             @RequestParam(defaultValue = "1") Integer pageNo,
                             @RequestParam(defaultValue = "3") Integer pageSize){
         List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, pageNo, pageSize);
+        for (Maintain_users maintain_user : maintainUsersList) {
+            String[] Ids = maintain_user.getHospitalIds().split(",");
+            maintain_user.setHospitalNames(mainUserSer.getHospitalList(Ids));
+        }
         if(maintainUsersList!=null){
             Page<Maintain_users> page=new Page<>();
             page.setPageNo(pageNo);

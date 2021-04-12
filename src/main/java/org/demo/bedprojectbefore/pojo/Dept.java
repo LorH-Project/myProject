@@ -1,11 +1,14 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Dept {
     private int deptId;
     private String deptName;
     private int hospitalId;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
     private String hospitalName;
     private String address;

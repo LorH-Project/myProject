@@ -1,5 +1,7 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.text.DecimalFormat;
 import java.util.Date;
 
@@ -19,6 +21,7 @@ public class Hospital {
     private String overTimePrice;
     private String deposit;
     private int isDel;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
     private String androidScreenStartTime;
     private String androidScreenEndTime;

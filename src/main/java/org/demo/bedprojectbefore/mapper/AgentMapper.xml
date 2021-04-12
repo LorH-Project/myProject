@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.AgentMapper">
+
+    <select id="selAgent" resultType="org.demo.bedprojectbefore.pojo.Agent">
+        SELECT `maintain_users`.*,`agent`.`companyName` FROM `maintain_users`,`agent`
+        WHERE `agent`.`agentId`=`maintain_users`.`agentId`
+    </select>
+
+
+</mapper>

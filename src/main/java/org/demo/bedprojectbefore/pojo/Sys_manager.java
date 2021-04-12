@@ -1,5 +1,7 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Sys_manager {
@@ -10,6 +12,7 @@ public class Sys_manager {
     private String passWord;
     private String managerPic;
     private int managerType;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ctime;
     private int isFlag;
     private int isDel;

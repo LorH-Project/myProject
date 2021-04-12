@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.Order_DepositMapper">
+
+
+    <select id="OrderList" resultType="org.demo.bedprojectbefore.pojo.Goods_Order_Share">
+
+        SELECT
+        order_deposit.`orderId`,
+        order_deposit.`outTradeNo`,
+        order_deposit.`amount`,
+        order_deposit.`status`,
+        order_deposit.`cTime`,
+        order_deposit.`isFlag`,
+        NickName,
+        address,
+        userPhone,
+        hospitalName,
+        users.`userId`,
+        `hospital`.`hospitalId`
+        FROM
+        `order_deposit`,
+        `users`,
+        `hospital`
+        WHERE 1 = 1
+        AND order_deposit.`userId` = users.`userId`
+        AND order_deposit.`hospitalId` = hospital.`hospitalId`
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and outTradeNo like concat ('%',#{outTradeNo},'%')
+          </if>
+        <if test="nickName!=null and nickName!=''">
+            and nickName like concat ('%',#{nickName},'%')
+        </if>
+        <if test="userPhone!=null and userPhone!=''">
+            and userPhone like concat ('%',#{userPhone},'%')
+        </if>
+        <if test="hospitalName!=null and hospitalName!=''">
+            and hospitalName like concat ('%',#{hospitalName},'%')
+        </if>
+        <if test="status!=0">
+            and order_deposit.status=#{status}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="getOrder_DeposityCount"  resultType="int">
+          SELECT
+    COUNT(*)
+  FROM
+   `order_deposit`,
+  `users`,
+  `hospital`
+WHERE 1 = 1
+  AND order_deposit.`userId` = users.`userId`
+  AND order_deposit.`hospitalId` = hospital.`hospitalId`
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and outTradeNo like concat ('%',#{outTradeNo},'%')
+        </if>
+        <if test="nickName!=null and nickName!=''">
+            and nickName like concat ('%',#{nickName},'%')
+        </if>
+        <if test="userPhone!=null and userPhone!=''">
+            and userPhone like concat ('%',#{userPhone},'%')
+        </if>
+        <if test="hospitalName!=null and hospitalName!=''">
+            and hospitalName like concat ('%',#{hospitalName},'%')
+        </if>
+        <if test="status!=0">
+            and order_deposit.status=#{status}
+        </if>
+    </select>
+</mapper>

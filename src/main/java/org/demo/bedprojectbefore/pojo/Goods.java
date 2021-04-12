@@ -1,5 +1,7 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Goods {
@@ -9,7 +11,9 @@ public class Goods {
     private String goodsSpec;
     private String goodsManufactor;
     private String goodsRegistration;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date uTime;
     private int isFlag;
 

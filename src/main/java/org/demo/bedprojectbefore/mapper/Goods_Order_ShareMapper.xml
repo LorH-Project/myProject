@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.Goods_Order_ShareMapper">
+    <select id="getGoodsOrderShareList" resultType="org.demo.bedprojectbefore.pojo.Goods_Order_Share">
+        select goods.`goodsName` goodsName,goods.`goodsPic` goodsPic,goods.`goodsSpec` goodsSpec,goods.`goodsManufactor` goodsManufactor,goods.`goodsRegistration` goodsRegistration,goods_order_share.*,device.`deviceNumber` deviceNumber,agent.companyName companyName,device.`deviceAddress` deviceAddress
+        from `agent`,`device`,`goods_order_share`,`hospital`,goods
+        where goods_order_share.`deviceId` = device.`deviceId`
+        and goods_order_share.hospitalId = hospital.`hospitalId`
+        and goods_order_share.goodsId = goods.`goodsId`
+        and hospital.agentId = agent.`agentId`
+        <if test="orderNo != null and orderNo != ''">
+            and orderNo = #{orderNo}
+        </if>
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber = #{deviceNumber}
+        </if>
+        <if test="address != null and address != ''">
+            and address = #{address}
+        </if>
+        <if test="openCabinetNumber != null and openCabinetNumber != ''">
+            and openCabinetNumber = #{openCabinetNumber}
+        </if>
+        <if test="goodsName != null and goodsName != ''">
+            and goodsName = #{goodsName}
+        </if>
+        <if test="agentId != 0">
+            and agent.agentId = #{agentId}
+        </if>
+        <if test="outTradeNo != null and outTradeNo != ''">
+            and outTradeNo = #{outTradeNo}
+        </if>
+        <if test="start != null and start != '' and start != 'undefined'">
+            and goods_order_share.payTime between #{start} and #{end}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getGoodsOrderShareCount" resultType="int">
+        select count(*)
+        from `agent`,`device`,`goods_order_share`,`hospital`,goods
+        where goods_order_share.`deviceId` = device.`deviceId`
+        and goods_order_share.hospitalId = hospital.`hospitalId`
+        and goods_order_share.goodsId = goods.`goodsId`
+        and hospital.agentId = agent.`agentId`
+        <if test="orderNo != null and orderNo != ''">
+            and orderNo = #{orderNo}
+        </if>
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber = #{deviceNumber}
+        </if>
+        <if test="address != null and address != ''">
+            and address = #{address}
+        </if>
+        <if test="openCabinetNumber != null and openCabinetNumber != ''">
+            and openCabinetNumber = #{openCabinetNumber}
+        </if>
+        <if test="goodsName != null and goodsName != ''">
+            and goodsName = #{goodsName}
+        </if>
+        <if test="agentId != 0">
+            and agent.agentId = #{agentId}
+        </if>
+        <if test="outTradeNo != null and outTradeNo != ''">
+            and outTradeNo = #{outTradeNo}
+        </if>
+        <if test="start != null and start != '' and start != 'undefined'">
+            and goods_order_share.payTime between #{start} and #{end}
+        </if>
+    </select>
+
+</mapper>

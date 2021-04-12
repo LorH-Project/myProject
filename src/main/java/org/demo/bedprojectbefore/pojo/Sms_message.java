@@ -1,5 +1,7 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Sms_message {
@@ -7,6 +9,7 @@ public class Sms_message {
     private String content;
     private String usersIds;
     private String phones;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date ctime;
 
     public int getMessageId() {

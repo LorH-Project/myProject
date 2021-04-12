@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.Order_shareMapper">
+
+
+
+<select id="OrderShareList" resultType="org.demo.bedprojectbefore.pojo.Order_Share">
+    SELECT
+    order_share.*,
+    users.`nickName`,
+    users.`userPhone`,
+    device.deviceNumber,
+    device.`deviceAddress`,
+    agent.`companyName`
+    FROM `order_share`,users,device,agent,hospital
+    WHERE 1=1
+    AND order_share.`userId`=users.`userId`
+    AND order_share.`deviceId`=device.`deviceId`
+    AND device.`agentId`=agent.`agentId`
+    AND order_share.`hospitalId`=hospital.`hospitalId`
+    <if test="orderNo != null and orderNo != ''">
+                and  orderNo like concat ('%',#{orderNo},'%')
+            </if>
+        <if test="NickName != null and NickName != ''">
+            and nickName like concat ('%',#{NickName},'%')
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone like concat ('%',#{userPhone},'%')
+        </if>
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber like concat ('%',#{deviceNumber},'%')
+        </if>
+        <if test="companyName != null and companyName != ''">
+            and companyName like concat ('%',#{companyName},'%')
+        </if>
+        <if test="outTradeNo != null and outTradeNo != ''">
+            and outTradeNo like concat ('%',#{outTradeNo},'%')
+        </if>
+        <if test="orderStatus !=0">
+            and orderStatus=#{orderStatus}
+        </if>
+        <if test="address != null and address != ''">
+            and address = #{address}
+        </if>
+    <if test="overTime !=-1">
+            and overTime=#{overTime}
+        </if>
+        <if test="start != null and start != '' and start != 'undefined'">
+            and openStartTime between #{start} and #{end}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="getOrderShareCount" resultType="int">
+    SELECT COUNT(*)
+    FROM
+  `order_share`,users,device,agent,hospital
+   WHERE 1=1
+  AND order_share.`userId`=users.`userId`
+  AND order_share.`deviceId`=device.`deviceId`
+  AND device.`agentId`=agent.`agentId`
+  AND order_share.`hospitalId`=hospital.`hospitalId`
+        <if test="orderNo != null and orderNo != ''">
+            and orderNo like concat ('%',#{orderNo},'%')
+        </if>
+        <if test="NickName != null and NickName != ''">
+            and NickName like concat ('%',#{NickName},'%')
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone like concat ('%',#{userPhone},'%')
+        </if>
+        <if test="address != null and address != ''">
+            and address = #{address}
+        </if>
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber like concat ('%',#{deviceNumber},'%')
+        </if>
+        <if test="companyName != null and companyName != ''">
+            and companyName like concat ('%',#{companyName},'%')
+        </if>
+        <if test="outTradeNo != null and outTradeNo != ''">
+            and outTradeNo like concat ('%',#{outTradeNo},'%')
+        </if>
+        <if test="orderStatus !=0">
+            and orderStatus=#{orderStatus}
+        </if>
+        <if test="address != null and address != ''">
+            and address = #{address}
+        </if>
+        <if test="overTime !=-1">
+            and overTime=#{overTime}
+        </if>
+        <if test="start != null and  start != '' and start != 'undefined'">
+            and openStartTime between #{start} and #{end}
+        </if>
+    </select>
+
+    <select id="getOrderList" resultType="org.demo.bedprojectbefore.pojo.Order_Share2">
+
+        <if test="orderType == 2">
+            SELECT goods_order_share.*,users.`nickName`,users.`userPhone`,device.`deviceNumber`,device.`deviceAddress`,
+            (SELECT fee FROM `finance` WHERE finance.type=3 AND finance.`orderId` = goods_order_share.`orderId`) fee,
+            (SELECT fee FROM `finance` WHERE finance.type=2 AND finance.`orderId` = goods_order_share.`orderId`) fee2
+            FROM users,device,goods_order_share
+            WHERE goods_order_share.`userId` = users.`userId`
+            AND goods_order_share.`deviceId` = device.`deviceId`
+        </if>
+        <if test="orderType == 1">
+            SELECT order_share.*,users.`nickName`,users.`userPhone`,device.`deviceNumber`,device.`deviceAddress`,
+            (SELECT fee FROM `finance` WHERE finance.type=3 AND finance.`orderId` = order_share.`orderId`) fee,
+            (SELECT fee FROM `finance` WHERE finance.type=2 AND finance.`orderId` = order_share.`orderId`) fee2
+            FROM users,device,order_share
+            WHERE order_share.`userId` = users.`userId`
+            AND order_share.`deviceId` = device.`deviceId`
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and orderNo = #{orderNo}
+        </if>
+        <if test="nickName != null and nickName != ''">
+            and nickName = #{nickName}
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone = #{userPhone}
+        </if>
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber = #{deviceNumber}
+        </if>
+        <if test="start != null and start != '' and start != 'undefined'">
+            <if test="orderType == 2">
+                and goods_order_share.cTime between #{start} and #{end}
+            </if>
+            <if test="orderType == 1">
+                and order_share.cTime between #{start} and #{end}
+            </if>
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getOrderCount" resultType="int">
+        SELECT count(*)
+        <if test="orderType == 2">
+            FROM users,device,goods_order_share
+            WHERE goods_order_share.`userId` = users.`userId`
+            AND goods_order_share.`deviceId` = device.`deviceId`
+        </if>
+        <if test="orderType == 1">
+            FROM users,device,order_share
+            WHERE order_share.`userId` = users.`userId`
+            AND order_share.`deviceId` = device.`deviceId`
+        </if>
+        <if test="orderNo != null and orderNo != ''">
+            and orderNo = #{orderNo}
+        </if>
+        <if test="nickName != null and nickName != ''">
+            and nickName = #{nickName}
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone = #{userPhone}
+        </if>
+        <if test="deviceNumber != null and deviceNumber != ''">
+            and deviceNumber = #{deviceNumber}
+        </if>
+        <if test="start != null and start != '' and start != 'undefined'">
+            <if test="orderType == 2">
+                and goods_order_share.cTime between #{start} and #{end}
+            </if>
+            <if test="orderType == 1">
+                and order_share.cTime between #{start} and #{end}
+            </if>
+        </if>
+    </select>
+</mapper>

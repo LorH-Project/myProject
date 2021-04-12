@@ -1,5 +1,7 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.text.DecimalFormat;
 import java.util.Date;
 
@@ -11,6 +13,7 @@ public class Finance_user {
     private DecimalFormat balance;
     private DecimalFormat fee;
     private int financeType;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
 
     public Finance_user() {

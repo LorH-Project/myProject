@@ -1,5 +1,7 @@
 package org.demo.bedprojectbefore.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Device {
@@ -15,6 +17,7 @@ public class Device {
     private int isStock;
     private int isDel;
     private int isFlag;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date cTime;
 
     public Device() {
