@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Api("订单管理")
 @RestController
@@ -92,15 +93,12 @@ public class Order_ShareController {
                        @RequestParam(defaultValue = "",required = false) String hospitalName,
                        @RequestParam(defaultValue = "1")int pageNo,
                        @RequestParam(defaultValue = "5") int pageSize ){
-        System.out.println("status:"+status);
         Page<Order_Deposit> page = new Page<>();
         page.setPageNo(pageNo);
         page.setPageSize(pageSize);
-        page.setRows(order_depositSer.OrderList(outTradeNo,nickName,userPhone,status,hospitalName,pageNo,pageSize));
+        page.setRows(order_depositSer.OrderList(outTradeNo, nickName, userPhone, status, hospitalName, pageNo, pageSize));
         page.setTotalCount(order_depositSer.getOrder_DeposityCount(outTradeNo,nickName,userPhone,status,hospitalName));
         page.setPageCount(page.getTotalCount()%pageSize==0?page.getTotalCount()/pageSize:page.getTotalCount()/pageSize+1);
-        System.out.println("Total:"+page.getTotalCount());
-        System.out.println("size:"+page.getRows().size());
         return DtoUtil.returnSuccess(page);
     }
 

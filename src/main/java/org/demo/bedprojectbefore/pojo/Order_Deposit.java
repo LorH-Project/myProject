@@ -17,6 +17,25 @@ public class Order_Deposit {
 
     private String flagStr="";  /*订单状态1.退押金2.缴纳押金*/
 
+    public Order_Deposit() {
+    }
+
+    public Order_Deposit(int orderId, String outTradeNo, int hospitalId, int userId, double amount, int status, int isFlag, String cTime, String nickName, String address, String hospitalName, String userPhone, String flagStr) {
+        this.orderId = orderId;
+        this.outTradeNo = outTradeNo;
+        this.hospitalId = hospitalId;
+        this.userId = userId;
+        this.amount = amount;
+        this.status = status;
+        this.isFlag = isFlag;
+        this.cTime = cTime;
+        this.nickName = nickName;
+        this.address = address;
+        this.hospitalName = hospitalName;
+        this.userPhone = userPhone;
+        this.flagStr = flagStr;
+    }
+
     @Override
     public String toString() {
         return "Order_Deposit{" +

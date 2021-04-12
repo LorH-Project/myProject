@@ -13,6 +13,7 @@ public class GoodSer {
 
     @Resource
     private GoodMapper goodMapper;
+
     public List<Goods> goodList(@Param("goodsName") String goodsName,
                                 @Param("goodsManufactor") String goodsManufactor,
                                 @Param("start")String statr, @Param("end")String end,

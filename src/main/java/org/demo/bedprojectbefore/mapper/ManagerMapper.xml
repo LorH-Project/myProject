@@ -7,5 +7,67 @@
         SELECT * FROM `sys_manager` WHERE `userAccount`=#{userAccount} AND `passWord`=#{passWord}
     </select>
 
+    <update id="updatePassword">
+            update sys_manager set passWord=#{123456} where agentId=#{agentId}
+    </update>
+
+    <select id="sys_manager" resultType="org.demo.bedprojectbefore.pojo.Sys_manager">
+    SELECT sys_manager.`userName`,sys_manager.`managerPic`,sys_manager.`userPhone`
+    FROM `sys_manager`where agentId=#{agentId}
+    </select>
+
+    <select id="getSys_manager_ByPhone" resultType="org.demo.bedprojectbefore.pojo.Sys_manager">
+        SELECT sys_manager.`userName`,sys_manager.`managerPic`,sys_manager.`userPhone`
+        FROM `sys_manager` where 1=1
+        <if test="userPhone!=null and userPhone!=''">
+            and userPhone=#{userPhone}
+        </if>
+    </select>
+    <select id="getManagerList" resultType="org.demo.bedprojectbefore.pojo.Sys_manager">
+        SELECT * FROM sys_manager WHERE managerType NOT BETWEEN 1 AND 2
+        <if test="userAccount != null and userAccount != ''">
+            and userAccount = #{userAccount}
+        </if>
+        <if test="userName != null and userName != ''">
+            and userName = #{userName}
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone = #{userPhone}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getManagerCount" resultType="int">
+        SELECT count(*) FROM sys_manager WHERE managerType NOT BETWEEN 1 AND 2
+        <if test="userAccount != null and userAccount != ''">
+            and userAccount = #{userAccount}
+        </if>
+        <if test="userName != null and userName != ''">
+            and userName = #{userName}
+        </if>
+        <if test="userPhone != null and userPhone != ''">
+            and userPhone = #{userPhone}
+        </if>
+    </select>
+    <insert id="insManager">
+        insert into sys_manager values(0,#{userName},#{userPhone},#{userAccount},'123',NULL,3,#{cTime},2,1,NULL)
+    </insert>
+    <update id="updPassword">
+        update sys_manager set passWord = #{newPassword} where userAccount = #{userAccount} and passWord = #{oldPassword}
+    </update>
+    <delete id="delById">
+        delete form sys_manager where managerId = #{managerId}
+    </delete>
+    <update id="updIsFlag">
+        update sys_manager set isFlag = #{isFlag} where managerId = #{managerId}
+    </update>
+    <update id="updPwd">
+        update sys_manager set passWord  = #{pwd} where managerId = #{managerId}
+    </update>
+    <update id="updManager">
+        update sys_manager set userName = #{userName} where managerId = #{managerId}
+    </update>
+    <insert id="insRole">
+        insert into sys_manager_role values(0,#{roleId},#{managerId})
+    </insert>
 
 </mapper>

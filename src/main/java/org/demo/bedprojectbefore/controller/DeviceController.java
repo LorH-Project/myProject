@@ -56,7 +56,7 @@ public class DeviceController {
         page.setPageSize(pageSize);
         page.setTotalCount(goodSer.getGoodCount(goodsName,goodsManufactor,start,end));
         page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
-        page.setRows(goodsList);
+        page.setRows(goodSer.goodList(goodsName, goodsManufactor, start, end, pageNo, pageSize));
         return DtoUtil.returnSuccess(page);
     }
 

@@ -35,7 +35,19 @@ public interface Order_shareMapper {
                            @Param("start") String start,
                            @Param("end") String end);
 
-
+    /**
+     * 分成明细
+     * @param orderNo
+     * @param nickName
+     * @param userPhone
+     * @param deviceNumber
+     * @param orderType
+     * @param start
+     * @param end
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
     List<Order_Share2> getOrderList(@Param("orderNo") String orderNo,
                                     @Param("nickName") String nickName,
                                     @Param("userPhone") String userPhone,

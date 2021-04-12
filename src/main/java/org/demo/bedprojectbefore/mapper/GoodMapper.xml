@@ -19,18 +19,18 @@
         limit #{pageNo},#{pageSize}
     </select>
     <select id="getGoodCount" resultType="int">
-        SELECT COUNT(*) FROM `goods`
-        <trim prefix="where" prefixOverrides="and|or">
-            <if test="goodsName!=null and goodsName!=''">
-                AND `goodsName` LIKE concat('%',#{goodsName},'%')
+        select count(*) from goods
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                and goodsName = #{goodsName}
             </if>
-            <if test="goodsManufactor!=null and goodsManufactor!=''">
-                AND `goodsManufactor` = #{goodsManufactor}
+            <if test="goodsManufactor != null and goodsManufactor != ''">
+                and goodsManufactor = #{goodsManufactor}
             </if>
             <if test="start != null and end != null and start != 'undefined'">
-                AND cTime BETWEEN #{start} and #{end}
+                and cTime between #{start} and #{end}
             </if>
-        </trim>
+        </where>
     </select>
     <select id="selIdGood" resultType="org.demo.bedprojectbefore.pojo.Goods">
         SELECT * FROM `goods` WHERE `goodsId` =#{goodsId}

@@ -29,9 +29,9 @@ public class FeedBackController {
 
     @ApiOperation(httpMethod = "GET",value = "意见反馈列表",notes = "意见反馈列表")
     @RequestMapping("/getFeedBackList")
-    public Dto getFeedBackList(@RequestParam(defaultValue = "") String userName,
-                               @RequestParam(defaultValue = "") String phone,
-                               @RequestParam(defaultValue = "") String commonProblemTitle,
+    public Dto getFeedBackList(@RequestParam(defaultValue = "",required = false) String userName,
+                               @RequestParam(defaultValue = "",required = false) String phone,
+                               @RequestParam(defaultValue = "",required = false) String commonProblemTitle,
                                @RequestParam(defaultValue = "0") int feedbackStatus,
                                @RequestParam(defaultValue = "1") int pageNo,
                                @RequestParam(defaultValue = "5") int pageSize){
@@ -90,6 +90,8 @@ public class FeedBackController {
         page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
         return DtoUtil.returnSuccess(page);
     }
+
+    @ApiIgnore
     @RequestMapping("/updateDesc")
     public Dto updateDesc(int feedbackId,
                           String feedbackDesc){
