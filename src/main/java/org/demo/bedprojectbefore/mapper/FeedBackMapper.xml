@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.FeedBackMapper">
+    <select id="getFeedBackList" resultType="org.demo.bedprojectbefore.pojo.FeedBack">
+        select feedback.*,users.nickName,users.userPhone from feedback,users where feedback.userId = users.userId
+                <if test="userName != null and userName != ''">
+                    and feedback.userId in (select userId from users where nickName = #{userName})
+                </if>
+                <if test="phone != null and phone != ''">
+                    and users.userPhone = #{phone}
+                </if>
+                <if test="commonProblemTitle != null and commonProblemTitle != ''">
+                    and commonProblemTitle = #{commonProblemTitle}
+                </if>
+        <if test="feedbackStatus != 0">
+            and feedbackStatus = #{feedbackStatus}
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+    <select id="getFeedBackTotal" resultType="int">
+        select count(*) from feedback,users where feedback.userId = users.userId
+        <if test="userName != null and userName != ''">
+            and feedback.userId in (select userId from users where nickName = #{userName})
+        </if>
+        <if test="phone != null and phone != ''">
+            and users.userPhone = #{phone}
+        </if>
+        <if test="commonProblemTitle != null and commonProblemTitle != ''">
+            and commonProblemTitle = #{commonProblemTitle}
+        </if>
+        <if test="feedbackStatus != 0">
+            and feedbackStatus = #{feedbackStatus}
+        </if>
+    </select>
+    <select id="getCommonProblemTitleList" resultType="String">
+        SELECT feedback.`commonProblemTitle` FROM feedback
+        GROUP BY commonProblemTitle
+    </select>
+    <select id="getDescById" resultType="String">
+        select feedbackDesc from feedback where feedbackId = #{feedbackId}
+    </select>
+    <update id="updateDescById">
+        update feedback set feedbackDesc = #{feedbackDesc} where feedbackId = #{feedbackId}
+    </update>
+    <select id="getContentById" resultType="org.demo.bedprojectbefore.pojo.FeedBack">
+        select * from feedback where feedbackId = #{feedbackId}
+    </select>
+</mapper>

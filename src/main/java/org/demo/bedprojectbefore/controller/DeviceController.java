@@ -31,10 +31,10 @@ import java.util.Random;
 public class DeviceController {
     private String fileName = "";
 
-    @Autowired
+    @Resource
     private GoodSer goodSer;
 
-    @Autowired
+    @Resource
     private CabinetSer cabinetSer;
 
     @Resource
@@ -47,18 +47,16 @@ public class DeviceController {
                         @RequestParam(defaultValue = "",required = false) String start,
                         @RequestParam(defaultValue = "",required = false) String end,
                         @RequestParam(defaultValue = "1") int pageNo,
-                        @RequestParam(defaultValue = "3") int pageSize){
+                        @RequestParam(defaultValue = "5") int pageSize){
         List<Goods> goodsList=goodSer.goodList(goodsName, goodsManufactor, start, end, pageNo, pageSize);
-        if(goodsList!=null){
-            Page<Goods> page=new Page<>();
-            page.setPageNo(pageNo);
-            page.setPageSize(pageSize);
-            page.setTotalCount(goodSer.getGoodCount(goodsName,goodsManufactor,start,end));
-            page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
-            page.setRows(goodsList);
-            return DtoUtil.returnSuccess(page);
-        }
-        return DtoUtil.returnSuccess("未查到数据","404");
+        System.out.println(goodsList.size());
+        Page<Goods> page=new Page<>();
+        page.setPageNo(pageNo);
+        page.setPageSize(pageSize);
+        page.setTotalCount(goodSer.getGoodCount(goodsName,goodsManufactor,start,end));
+        page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
+        page.setRows(goodsList);
+        return DtoUtil.returnSuccess(page);
     }
 
     //根据id查商品对象

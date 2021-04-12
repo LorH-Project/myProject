@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * Author:LiaoZhen
  * Date:  2021/4/2/13:54
  */
 public class Replenishment_Record {

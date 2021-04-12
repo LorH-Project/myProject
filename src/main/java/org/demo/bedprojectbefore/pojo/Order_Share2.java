@@ -1,7 +1,6 @@
 package org.demo.bedprojectbefore.pojo;
 
 /**
- * Author:LiaoZhen
  * Date:  2021/4/8/10:34
  */
 public class Order_Share2 {

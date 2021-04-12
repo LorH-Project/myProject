@@ -60,25 +60,6 @@ public class Order_ShareController {
         return DtoUtil.returnSuccess(page);
     }
 
-/*    @RequestMapping("/getOrderList")
-    public Dto getOrderList(@RequestParam(defaultValue = "") String orderNo,
-                            @RequestParam(defaultValue = "") String nickName,
-                            @RequestParam(defaultValue = "") String userPhone,
-                            @RequestParam(defaultValue = "") String deviceNumber,
-                            @RequestParam(defaultValue = "0") int orderType,
-                            @RequestParam(defaultValue = "") String start,
-                            @RequestParam(defaultValue = "") String end,
-                            @RequestParam(defaultValue = "1") int pageNo,
-                            @RequestParam(defaultValue = "5") int pageSize){
-        Page<Order_Share2> page = new Page<>();
-        page.setPageNo(pageNo);
-        page.setPageSize(pageSize);
-        page.setRows(order_shareService.getOrderList(orderNo, nickName, userPhone, deviceNumber, orderType, start, end, pageNo, pageSize));
-        page.setTotalCount(order_shareService.getOrderCount(orderNo, nickName, userPhone, deviceNumber, orderType, start, end));
-        page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
-        return DtoUtil.returnSuccess(page);
-    }*/
-
     @ApiOperation(httpMethod = "GET",value = "商品订单列表信息",notes = "商品订单列表信息")
     @RequestMapping("/getGoodsOrderShareList")
     public Dto getGoodsOrderShareList(@RequestParam(defaultValue = "",required = false) String orderNo,

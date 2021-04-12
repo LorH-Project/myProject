@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
 @CrossOrigin
 public class AgentController {
 
-    @Autowired
+    @Resource
     private AgentSer agentSer;
 
     @ApiIgnore

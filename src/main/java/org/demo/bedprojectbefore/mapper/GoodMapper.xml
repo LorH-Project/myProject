@@ -4,28 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.demo.bedprojectbefore.mapper.GoodMapper">
     <select id="goodList" resultType="org.demo.bedprojectbefore.pojo.Goods">
-        SELECT * FROM `goods`
-        <trim prefix="where" prefixOverrides="and|or">
-            <if test="goodsName!=null and goodsName!=''">
-                `goodsName` LIKE concat('%',#{goodsName},'%')
+        select * from goods
+        <where>
+            <if test="goodsName != null and goodsName != ''">
+                and goodsName = #{goodsName}
             </if>
-            <if test="goodsManufactor!=null and goodsManufactor!=''">
-                AND `goodsManufactor` =#{goodsManufactor}
+            <if test="goodsManufactor != null and goodsManufactor != ''">
+                and goodsManufactor = #{goodsManufactor}
             </if>
             <if test="start != null and end != null and start != 'undefined'">
-                AND cTime BETWEEN #{start} and #{end}
+                and cTime between #{start} and #{end}
             </if>
-        </trim>
+        </where>
         limit #{pageNo},#{pageSize}
     </select>
     <select id="getGoodCount" resultType="int">
         SELECT COUNT(*) FROM `goods`
         <trim prefix="where" prefixOverrides="and|or">
             <if test="goodsName!=null and goodsName!=''">
-                `goodsName` LIKE concat('%',#{goodsName},'%')
+                AND `goodsName` LIKE concat('%',#{goodsName},'%')
             </if>
             <if test="goodsManufactor!=null and goodsManufactor!=''">
-                AND `goodsManufactor` =#{goodsManufactor}
+                AND `goodsManufactor` = #{goodsManufactor}
             </if>
             <if test="start != null and end != null and start != 'undefined'">
                 AND cTime BETWEEN #{start} and #{end}

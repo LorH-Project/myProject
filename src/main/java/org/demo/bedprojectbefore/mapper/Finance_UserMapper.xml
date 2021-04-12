@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.demo.bedprojectbefore.mapper.Finance_UserMapper">
+
+
+    <select id="FinaList" resultType="org.demo.bedprojectbefore.pojo.Finance_User">
+
+
+    SELECT `finance_user`.*,users.`nickName` FROM finance_user,users WHERE 1=1 AND finance_user.`userId`=users.`userId`
+    <if test="outTradeNo!=null and outTradeNo!=''">
+        and outTradeNo like concat('%',#{outTradeNo},'%')
+        </if>
+        <if test="nickName!=null and nickName!=''">
+
+            and nickName like concat('%',#{nickName},'%')
+        </if>
+        <if test="financeType!=0">
+            and financeType=#{financeType}
+        </if>
+        <if test="start != null and start != '' and start != 'undefined'">
+            and finance_user.cTime between #{start} and #{end}
+
+        </if>
+        limit #{pageNo},#{pageSize}
+    </select>
+
+    <select id="getFinaCount" resultType="int">
+      SELECT COUNT(*) FROM finance_user,users WHERE 1=1 AND finance_user.`userId`=users.`userId`
+        <if test="outTradeNo!=null and outTradeNo!=''">
+            and outTradeNo like concat('%',#{outTradeNo},'%')
+        </if>
+        <if test="nickName!=null and nickName!=''">
+
+            and nickName like concat('%',#{nickName},'%')
+        </if>
+        <if test="financeType!=0">
+            and financeType=#{financeType}
+        </if>
+        <if test="start != null and start != '' and start != 'undefined'">
+            and finance_user.cTime between #{start} and #{end}
+        </if>
+    </select>
+</mapper>

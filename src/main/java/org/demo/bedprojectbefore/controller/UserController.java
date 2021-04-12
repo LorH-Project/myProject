@@ -16,6 +16,7 @@ import org.demo.bedprojectbefore.service.UserSer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
@@ -24,11 +25,11 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
 
-    @Autowired
+    @Resource
     private UserSer userSer;
-    @Autowired
+    @Resource
     private MainUserSer mainUserSer;
-    @Autowired
+    @Resource
     private SmsSer smsSer;
 
     @ApiOperation(httpMethod = "GET",value = "查询用户列表",notes = "查询用户列表")

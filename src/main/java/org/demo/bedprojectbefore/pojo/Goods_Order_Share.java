@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * Author:LiaoZhen
  * Date:  2021/3/30/11:42
  */
 public class Goods_Order_Share {
@@ -26,15 +25,11 @@ public class Goods_Order_Share {
     private String openCabinetNumber;
     private int isFlag;
     private int isDel;
-
     private String goodsName;
     private String goodsPic;
     private String goodsSpec;
     private String goodsManufactor;
     private String goodsRegistration;
-
-
-
     private String deviceAddress;
     private String deviceNumber;
     private String companyName;

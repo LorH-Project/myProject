@@ -17,7 +17,6 @@ public class GoodSer {
                                 @Param("goodsManufactor") String goodsManufactor,
                                 @Param("start")String statr, @Param("end")String end,
                                 @Param("pageNo")int pageNo, @Param("pageSize")int pageSize) {
-
         return goodMapper.goodList(goodsName, goodsManufactor, statr, end, (pageNo-1)*pageSize, pageSize);
     }
 

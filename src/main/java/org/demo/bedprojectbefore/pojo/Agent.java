@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * Author:LiaoZhen
  * Date:  2021/3/30/15:50
  */
 public class Agent {
