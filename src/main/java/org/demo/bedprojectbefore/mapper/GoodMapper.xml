@@ -39,28 +39,15 @@
         delete from goods where goodsId=#{goodsId}
     </delete>
     <insert id="addGoods">
-        INSERT INTO `chaperonebed`.`goods` (
-          `goodsId`,
-          `goodsName`,
-          `goodsPic`,
-          `goodsSpec`,
-          `goodsManufactor`,
-          `goodsRegistration`,
-          `cTime`,
-          `uTime`,
-          `isFlag`
-        )
-        VALUES
-          (
-            #{goodsId},
-            #{goodsName},
-            #{goodsPic},
-            #{goodsSpec},
-            #{goodsManufactor},
-            #{goodsRegistration},
-            #{cTime},
-            #{uTime},
-            #{isFlag}
-  )
+        insert into goods values(#{goodsId},#{goodsName},#{goodsPic},#{goodsSpec},#{goodsManufactor},#{goodsRegistration},#{cTime},#{uTime},#{isFlag})
     </insert>
+    <update id="updateGoods">
+        update goods set goodsName = #{goodsName},
+        goodsPic = #{goodsPic},
+        goodsSpec = #{goodsSpec},
+        goodsManufactor = #{goodsManufactor},
+        goodsRegistration = #{goodsRegistration},
+        uTime = #{uTime}
+        where goodsId = #{goodsId}
+    </update>
 </mapper>

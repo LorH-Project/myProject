@@ -38,6 +38,9 @@ public class GoodSer {
         return goodMapper.addGoods(goods);
     }
 
+    public int updateGoods(Goods goods){
+        return goodMapper.updateGoods(goods);
+    }
 
 
 }

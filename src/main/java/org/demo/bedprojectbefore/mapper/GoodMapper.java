@@ -49,4 +49,11 @@ public interface GoodMapper {
      */
     public int addGoods(Goods goods);
 
+    /**
+     * 修改
+     * @param goods
+     * @return
+     */
+    int updateGoods(Goods goods);
+
 }

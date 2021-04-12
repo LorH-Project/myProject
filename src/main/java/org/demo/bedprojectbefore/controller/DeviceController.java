@@ -1,6 +1,7 @@
 package org.demo.bedprojectbefore.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.demo.bedprojectbefore.config.Dto;
@@ -59,6 +60,38 @@ public class DeviceController {
         return DtoUtil.returnSuccess(page);
     }
 
+    @ApiOperation(httpMethod = "GET",value ="删除商品",notes = "删除商品")
+    @RequestMapping(value = "/delGood")
+    public Dto delGood(@RequestParam("id")int id){
+        return DtoUtil.returnSuccess(goodSer.delGood(id));
+    }
+
+    @ApiOperation(httpMethod = "GET",value = "新增商品",notes = "新增商品")
+    @RequestMapping("/insGoods")
+    public Dto insGoods(@RequestBody Goods goods, MultipartFile file){
+        String path = "D:\\Y2\\vue\\test\\public\\upload\\images\\";
+        String suf = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        System.out.println(suf);
+        File file1 = new File(path);
+        if(!file1.exists()){
+            file1.mkdirs();
+        }
+        try{
+            fileName = "aa"+new Random().nextInt(1000)+suf;
+            System.out.println(fileName);
+            file.transferTo(new File(path+fileName));/*上传*/
+            goods.setGoodsPic("/upload/images/"+fileName);
+            goods.setcTime(new Date());
+            goods.setGoodsId(0);
+            goods.setIsFlag(2);
+            System.out.println(goods.getGoodsPic());
+            return DtoUtil.returnSuccess(goodSer.addGoods(goods));
+        }catch (Exception e){
+            e.printStackTrace();
+            return DtoUtil.returnSuccess("未查到数据","404");
+        }
+    }
+
     //根据id查商品对象
     @ApiIgnore
     @RequestMapping(value = "/selIdGood")
@@ -68,35 +101,32 @@ public class DeviceController {
         return DtoUtil.returnSuccess(goods);
     }
 
-    @ApiOperation(httpMethod = "GET",value ="删除商品",notes = "删除商品")
-    @RequestMapping(value = "/delGood")
-    public Dto delGood(@RequestParam("id")int id){
-        return DtoUtil.returnSuccess(goodSer.delGood(id));
-    }
-
-    @ApiOperation(httpMethod = "GET",value = "新增商品")
-    @RequestMapping("/insGoods")
-    public Dto insGoods(Goods goods, MultipartFile file){
+    @ApiOperation(httpMethod = "GET",value = "修改商品")
+    @RequestMapping("/updGoods")
+    public Dto updGoods(Goods goods,MultipartFile file){
         String path = "D:\\Y2\\vue\\test\\public\\upload\\images\\";
-        String suf = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        String suf="";
+        if(file!=null){
+            suf= file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+        }
         File file1 = new File(path);
         if(!file1.exists()){
             file1.mkdirs();
         }
         try{
-            fileName = "lz"+new Random().nextInt(1000)+suf;
-            file.transferTo(new File(path+fileName));/*上传*/
-            goods.setGoodsPic("/upload/images/"+fileName);
-            goods.setcTime(new Date());
-            goods.setGoodsId(0);
-            goods.setIsFlag(2);
-            return DtoUtil.returnSuccess(goodSer.addGoods(goods));
+            if(file!=null){
+                fileName = "lz"+new Random().nextInt(1000)+suf;
+                file.transferTo(new File(path+fileName));
+                goods.setGoodsPic("/upload/images/"+fileName);
+            }
+            goods.setuTime(new Date());
+            return DtoUtil.returnSuccess(goodSer.updateGoods(goods));
         }catch (Exception e){
             e.printStackTrace();
-            return DtoUtil.returnSuccess("未查到数据","404");
+            return DtoUtil.returnSuccess("0");
         }
-
     }
+
 
 
     @ApiOperation(httpMethod = "GET",value = "陪护床格子开关列表",notes = "陪护床格子开关列表")
