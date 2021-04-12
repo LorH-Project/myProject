@@ -11,7 +11,8 @@ public class ManagerSer{
 
     @Resource
     private ManagerMapper managerMapper;
-    public Sys_manager login(String username, String password) {
-        return managerMapper.login(username,password);
+    public Sys_manager login(String userAccount, String passWord)
+    {
+        return managerMapper.login(userAccount,passWord);
     }
 }

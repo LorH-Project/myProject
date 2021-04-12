@@ -7,6 +7,33 @@ public class Dept {
     private String deptName;
     private int hospitalId;
     private Date cTime;
+    private String hospitalName;
+    private String address;
+    private int deviceCount;
+
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getDeviceCount() {
+        return deviceCount;
+    }
+
+    public void setDeviceCount(int deviceCount) {
+        this.deviceCount = deviceCount;
+    }
 
     public int getDeptId() {
         return deptId;

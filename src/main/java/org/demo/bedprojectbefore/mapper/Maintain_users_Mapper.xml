@@ -4,8 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.demo.bedprojectbefore.mapper.Maintain_users_Mapper">
     <select id="mainUserList" resultType="org.demo.bedprojectbefore.pojo.Maintain_users">
-        SELECT ms.*,us.`userPhone`,ag.companyName FROM `maintain_users` ms INNER JOIN `users` us ON ms.userId=us.`userId`
-        INNER JOIN agent ag ON ms.agentId=ag.agentId
+        SELECT maintain_users.*,users.`userPhone`,users.nickName,agent.`companyName`
+        FROM `maintain_users`,`agent`,`users`
+        WHERE maintain_users.`userId` = users.`userId` AND maintain_users.`agentId` = agent.`agentId`
         <trim prefix="where" prefixOverrides="and|or">
             <if test="realName!=null and realName!=''">
                 realName LIKE CONCAT ('%',#{realName},'%')

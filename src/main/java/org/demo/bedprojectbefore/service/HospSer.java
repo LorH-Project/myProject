@@ -31,7 +31,7 @@ public class HospSer {
                             @Param("companyName") String companyName){
         return hospitalMapper.getHospCount(hospitalName, address, linkName, linkPhone, companyName);
     }
-    public int delHosp(@Param("id") int id){
-        return hospitalMapper.delHosp(id);
+    public int delHosp(@Param("hospitalId") int hospitalId){
+        return hospitalMapper.delHosp(hospitalId);
     }
 }

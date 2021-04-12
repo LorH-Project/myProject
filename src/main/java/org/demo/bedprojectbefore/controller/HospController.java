@@ -28,7 +28,7 @@ public class HospController {
 
 
     @ApiOperation(httpMethod = "GET",value = "医院列表",notes = "医院列表")
-    @RequestMapping(value = "/hospList")
+        @RequestMapping(value = "/hospList")
     public Dto hospList(@RequestParam(defaultValue = "",required = false) String hospitalName,
                         @RequestParam(defaultValue = "",required = false) String address,
                         @RequestParam(defaultValue = "",required = false) String linkName,
@@ -38,7 +38,6 @@ public class HospController {
                         @RequestParam(defaultValue = "3")Integer pageSize){
         System.out.println(hospitalName+" "+address+" "+linkName+" "+linkPhone+" "+companyName);
         List<Hospital> hospitalList=hospSer.hospList(hospitalName, address, linkName, linkPhone, companyName, pageNo, pageSize);
-        System.out.println(hospitalList);
         if(hospitalList!=null){
             Page<Hospital> page=new Page<>();
             page.setPageNo(pageNo);
@@ -54,11 +53,11 @@ public class HospController {
 
     @ApiOperation(httpMethod = "GET",value = "删除医院",notes = "删除医院")
     @RequestMapping(value = "/delHosp")
-    public Dto delHosp(@RequestParam("id") int id){
-        System.out.println(id);
-        int result=hospSer.delHosp(id);
+    public Dto delHosp(@RequestParam("hospitalId") int hospitalId){
+        System.out.println(hospitalId);
+        int result=hospSer.delHosp(hospitalId);
         if(result>0){
-            return DtoUtil.returnSuccess(hospSer.delHosp(id));
+            return DtoUtil.returnSuccess(hospSer.delHosp(hospitalId));
         }
         return DtoUtil.returnSuccess("删除失败","404");
     }

@@ -43,6 +43,6 @@
         </if>
     </select>
     <delete id="delHosp">
-        delete from hospital where hospitalId = #{id}
+        delete from hospital where hospitalId = #{hospitalId}
     </delete>
 </mapper>

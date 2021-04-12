@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.demo.bedprojectbefore.mapper.ManagerMapper">
     <select id="login" resultType="org.demo.bedprojectbefore.pojo.Sys_manager">
-        SELECT * FROM `sys_manager` WHERE `userAccount`=#{username} AND `passWord`=#{password}
+        SELECT * FROM `sys_manager` WHERE `userAccount`=#{userAccount} AND `passWord`=#{passWord}
     </select>
 
 

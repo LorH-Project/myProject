@@ -20,10 +20,8 @@ public class LoginController {
 
     @ApiOperation(httpMethod = "GET",value = "登录",notes = "登录")
     @RequestMapping(value = "/login")
-    public Dto login(@RequestParam("username") String username, @RequestParam("password") String password){
-        System.out.println(username+" "+password);
-        Sys_manager manager=managerSer.login(username,password);
-        System.out.println(manager);
+    public Dto login(@RequestParam("userAccount") String userAccount, @RequestParam("passWord") String passWord){
+        Sys_manager manager=managerSer.login(userAccount,passWord);
         if(manager!=null){
             return DtoUtil.returnSuccess("登录成功");
         }

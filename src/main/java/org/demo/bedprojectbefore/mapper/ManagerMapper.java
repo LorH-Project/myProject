@@ -8,5 +8,5 @@ import org.demo.bedprojectbefore.pojo.Sys_manager;
 @Mapper
 public interface ManagerMapper {
     //登录
-    Sys_manager login(@Param("username") String username, @Param("password") String password);
+    Sys_manager login(@Param("userAccount") String userAccount, @Param("passWord") String passWord);
 }

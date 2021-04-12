@@ -45,8 +45,8 @@ public interface HospitalMapper {
 
     /**
      * 删除医院
-     * @param id
+     * @param hospitalId
      * @return
      */
-    public int delHosp(@Param("id") int id);
+    public int delHosp(@Param("hospitalId") int hospitalId);
 }

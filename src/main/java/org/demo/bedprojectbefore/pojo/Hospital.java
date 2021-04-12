@@ -14,19 +14,23 @@ public class Hospital {
     private String directorPhone;
     private String servicePhone;
     private int agentId;
-    private DecimalFormat longitude;
-    private DecimalFormat latitude;
-    private DecimalFormat overTimePrice;
-    private DecimalFormat deposit;
+    private String longitude;
+    private String latitude;
+    private String overTimePrice;
+    private String deposit;
     private int isDel;
     private Date cTime;
     private String androidScreenStartTime;
     private String androidScreenEndTime;
+    private String linkName;
+    private String linkPhone;
+    private Integer deviceCount;
+    private String companyName;
 
     public Hospital() {
     }
 
-    public Hospital(int hospitalId, String hospitalName, String province, String city, String area, String address, String directorName, String directorPhone, String servicePhone, int agentId, DecimalFormat longitude, DecimalFormat latitude, DecimalFormat overTimePrice, DecimalFormat deposit, int isDel, Date cTime, String androidScreenStartTime, String androidScreenEndTime) {
+    public Hospital(int hospitalId, String hospitalName, String province, String city, String area, String address, String directorName, String directorPhone, String servicePhone, int agentId, String longitude, String latitude, String overTimePrice, String deposit, int isDel, Date cTime, String androidScreenStartTime, String androidScreenEndTime) {
         this.hospitalId = hospitalId;
         this.hospitalName = hospitalName;
         this.province = province;
@@ -45,6 +49,38 @@ public class Hospital {
         this.cTime = cTime;
         this.androidScreenStartTime = androidScreenStartTime;
         this.androidScreenEndTime = androidScreenEndTime;
+    }
+
+    public String getLinkName() {
+        return linkName;
+    }
+
+    public void setLinkName(String linkName) {
+        this.linkName = linkName;
+    }
+
+    public String getLinkPhone() {
+        return linkPhone;
+    }
+
+    public void setLinkPhone(String linkPhone) {
+        this.linkPhone = linkPhone;
+    }
+
+    public Integer getDeviceCount() {
+        return deviceCount;
+    }
+
+    public void setDeviceCount(Integer deviceCount) {
+        this.deviceCount = deviceCount;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public int getHospitalId() {
@@ -127,35 +163,35 @@ public class Hospital {
         this.agentId = agentId;
     }
 
-    public DecimalFormat getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(DecimalFormat longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public DecimalFormat getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(DecimalFormat latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public DecimalFormat getOverTimePrice() {
+    public String getOverTimePrice() {
         return overTimePrice;
     }
 
-    public void setOverTimePrice(DecimalFormat overTimePrice) {
+    public void setOverTimePrice(String overTimePrice) {
         this.overTimePrice = overTimePrice;
     }
 
-    public DecimalFormat getDeposit() {
+    public String getDeposit() {
         return deposit;
     }
 
-    public void setDeposit(DecimalFormat deposit) {
+    public void setDeposit(String deposit) {
         this.deposit = deposit;
     }
 

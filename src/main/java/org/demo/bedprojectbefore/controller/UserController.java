@@ -74,7 +74,7 @@ public class UserController {
     @ApiOperation(httpMethod = "GET",value = "短信列表",notes = "短信列表")
     @RequestMapping(value = "/smsManagerList")
     public Dto smsManagerList(@RequestParam(defaultValue = "",required = false)String content,
-                              @RequestParam(defaultValue = "0")Integer pageNo,
+                              @RequestParam(defaultValue = "1")Integer pageNo,
                               @RequestParam(defaultValue = "3")Integer pageSize){
         List<Sms_message> smsList=smsSer.smsList(content, pageNo, pageSize);
         if(smsList!=null){
@@ -100,14 +100,13 @@ public class UserController {
     public Dto mainUserList(@RequestParam(defaultValue = "",required = false) String realName,
                             @RequestParam(defaultValue = "",required = false) String userPhone,
                             @RequestParam(defaultValue = "",required = false) Integer agentId,
-                            @RequestParam(defaultValue = "1") String pageNo,
-                            @RequestParam(defaultValue = "3") String pageSize){
-        System.out.println(realName+" "+userPhone+" "+agentId+" "+pageNo+" "+pageSize);
-        List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, Integer.parseInt(pageNo), Integer.parseInt(pageSize));
+                            @RequestParam(defaultValue = "1") Integer pageNo,
+                            @RequestParam(defaultValue = "3") Integer pageSize){
+        List<Maintain_users> maintainUsersList=mainUserSer.mainUserList(realName, userPhone, agentId, pageNo, pageSize);
         if(maintainUsersList!=null){
             Page<Maintain_users> page=new Page<>();
-            page.setPageNo(Integer.parseInt(pageNo));
-            page.setPageSize(Integer.parseInt(pageSize));
+            page.setPageNo(pageNo);
+            page.setPageSize(pageSize);
             page.setTotalCount(mainUserSer.getMainCount(realName, userPhone, agentId));
             page.setRows(maintainUsersList);
             page.setPageCount(page.getTotalCount()%page.getPageSize()==0?page.getTotalCount()/page.getPageSize():page.getTotalCount()/page.getPageSize()+1);
@@ -118,7 +117,7 @@ public class UserController {
 
     @ApiOperation(httpMethod = "GET",value = "删除维护人员",notes = "删除维护人员")
     @RequestMapping(value = "/delMain")
-    public Dto delMain(@RequestParam("maintainIds")int maintainId){
+    public Dto delMain(@RequestParam("maintainId")int maintainId){
           return  DtoUtil.returnSuccess(mainUserSer.delMain(maintainId));
     }
 
