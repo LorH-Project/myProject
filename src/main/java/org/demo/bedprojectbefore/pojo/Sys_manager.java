@@ -13,7 +13,7 @@ public class Sys_manager {
     private String managerPic;
     private int managerType;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private Date ctime;
+    private Date cTime;
     private int isFlag;
     private int isDel;
     private int agentId;
@@ -29,7 +29,7 @@ public class Sys_manager {
         this.passWord = passWord;
         this.managerPic = managerPic;
         this.managerType = managerType;
-        this.ctime = ctime;
+        this.cTime = ctime;
         this.isFlag = isFlag;
         this.isDel = isDel;
         this.agentId = agentId;
@@ -91,12 +91,12 @@ public class Sys_manager {
         this.managerType = managerType;
     }
 
-    public Date getCtime() {
-        return ctime;
+    public Date getcTime() {
+        return cTime;
     }
 
-    public void setCtime(Date ctime) {
-        this.ctime = ctime;
+    public void setcTime(Date cTime) {
+        this.cTime = cTime;
     }
 
     public int getIsFlag() {

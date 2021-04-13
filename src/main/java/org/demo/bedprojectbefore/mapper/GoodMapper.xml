@@ -12,7 +12,7 @@
             <if test="goodsManufactor != null and goodsManufactor != ''">
                 and goodsManufactor = #{goodsManufactor}
             </if>
-            <if test="start != null and end != null and start != 'undefined'">
+            <if test="start != null and start != ''  and start != 'undefined'">
                 and cTime between #{start} and #{end}
             </if>
         </where>
@@ -27,7 +27,7 @@
             <if test="goodsManufactor != null and goodsManufactor != ''">
                 and goodsManufactor = #{goodsManufactor}
             </if>
-            <if test="start != null and end != null and start != 'undefined'">
+            <if test="start != null and start != '' and start != 'undefined'">
                 and cTime between #{start} and #{end}
             </if>
         </where>

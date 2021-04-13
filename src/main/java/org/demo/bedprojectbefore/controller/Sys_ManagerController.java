@@ -37,7 +37,7 @@ public class Sys_ManagerController {
     }
     @ApiOperation(httpMethod = "GET",value = "新增管理员",notes = "新增管理员")
     @RequestMapping("/insManager")
-    public Dto insManager(@RequestBody Sys_manager sys_manager){
+    public Dto insManager(Sys_manager sys_manager){
         return DtoUtil.returnSuccess(sys_managerService.insManager(sys_manager));
     }
     @ApiIgnore
