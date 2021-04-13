@@ -43,6 +43,13 @@ public interface GoodMapper {
     public int delGood(@Param("id") int id);
 
     /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    public int deleteGoodsById(@Param("ids") String[] ids);
+
+    /**
      * 新增商品
      * @param goods
      * @return

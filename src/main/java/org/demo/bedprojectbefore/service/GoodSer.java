@@ -43,5 +43,9 @@ public class GoodSer {
         return goodMapper.updateGoods(goods);
     }
 
+    public int deleteGoodsById(@Param("ids") String[] ids){
+        return  goodMapper.deleteGoodsById(ids);
+    }
+
 
 }

@@ -66,6 +66,14 @@ public class DeviceController {
         return DtoUtil.returnSuccess(goodSer.delGood(id));
     }
 
+    @ApiIgnore
+    @RequestMapping("/deleteGoodsById")
+    public Dto deleteGoodsById(String Ids){
+        String[] goodsIds = Ids.split(",");
+        System.out.println("length:"+goodsIds.length);
+        return DtoUtil.returnSuccess(goodSer.deleteGoodsById(goodsIds));
+    }
+
     @ApiOperation(httpMethod = "GET",value = "新增商品",notes = "新增商品")
     @RequestMapping("/insGoods")
     public Dto insGoods(@RequestBody Goods goods, MultipartFile file){

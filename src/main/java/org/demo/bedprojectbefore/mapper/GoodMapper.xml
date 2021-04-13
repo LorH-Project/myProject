@@ -38,6 +38,13 @@
     <delete id="delGood">
         delete from goods where goodsId=#{goodsId}
     </delete>
+    <delete id="deleteGoodsById">
+        delete from goods where goodsId in
+        <foreach item="item" index="index" collection="ids"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
     <insert id="addGoods">
         insert into goods values(#{goodsId},#{goodsName},#{goodsPic},#{goodsSpec},#{goodsManufactor},#{goodsRegistration},#{cTime},#{uTime},#{isFlag})
     </insert>
